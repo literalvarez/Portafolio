@@ -229,7 +229,7 @@
   .pg-track.dragging { cursor: grabbing; scroll-snap-type: none; }
   .pg-track.dragging .pg-card { pointer-events: none; }
   .pg-card {
-    position: relative; flex: none; width: clamp(160px, 16vw, 200px); aspect-ratio: 1; scroll-snap-align: start;
+    position: relative; flex: none; width: clamp(190px, 19vw, 240px); aspect-ratio: 1; scroll-snap-align: start;
     border-radius: 18px; overflow: hidden; isolation: isolate; color: #fff; background: var(--blue-1);
     border: 1.5px solid var(--line); user-select: none;
     transform: rotate(var(--tilt, 0deg));
@@ -243,8 +243,8 @@
   .pg-card::before {
     content: ""; position: absolute; inset: 0; z-index: -1;
     background-image:
-      radial-gradient(circle, rgba(2,5,26,.28) 1.4px, transparent 2px),
-      radial-gradient(circle, rgba(2,5,26,.28) 1.4px, transparent 2px),
+      radial-gradient(circle, rgba(2,5,26,.14) 1.4px, transparent 2px),
+      radial-gradient(circle, rgba(2,5,26,.14) 1.4px, transparent 2px),
       linear-gradient(to top, rgba(2,5,26,.88), rgba(2,5,26,.2) 55%, transparent 75%),
       linear-gradient(rgba(7,43,242,.22), rgba(7,43,242,.22));
     background-size: 9px 15.6px, 9px 15.6px, 100% 100%, 100% 100%; background-position: 0 0, 4.5px 7.8px, 0 0, 0 0;

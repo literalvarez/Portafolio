@@ -79,7 +79,7 @@
   const nav = document.createElement('header');
   nav.className = 'nav';
   nav.innerHTML = `
-    <a class="logo" href="${home}#top"><span class="logo-mark">TA</span><span>${site.name}</span></a>
+    <a class="logo" href="${home}#top"><span class="logo-mark"><img src="${assets}logo-64.png" alt="" width="36" height="36"></span><span>${site.name}</span></a>
     <nav class="nav-links">
       <a href="${home}#work" class="hide-sm">Work</a>
       <a href="${home}#about" class="hide-sm">About</a>
