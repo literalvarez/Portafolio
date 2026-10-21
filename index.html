@@ -3,48 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio Drafts</title>
-<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared/base.css">
-<style>
-  :root { --font: 'Manrope', system-ui, sans-serif; }
-  main { padding: 72px 0 80px; }
-  h1 { font-size: clamp(36px, 6vw, 64px); letter-spacing: -.04em; line-height: 1; margin: 14px 0 12px; }
-  .lead { color: var(--muted); max-width: 620px; margin: 0 0 44px; }
-  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
-  .card {
-    display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px;
-    transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .35s;
-  }
-  .card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
-  .card .n { font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: .12em; }
-  .card h2 { margin: 6px 0 8px; font-size: 26px; letter-spacing: -.03em; }
-  .card p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
-  .card .font { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); display: inline-block; }
-  .swatches { display: flex; gap: 8px; margin: 48px 0 0; }
-  .swatches i { flex: 1; height: 44px; border-radius: 12px; }
-  .top { display: flex; justify-content: space-between; align-items: center; }
-</style>
+<title>Tomas Alvarez · Game Designer &amp; Developer</title>
+<!-- The site lives in v2b-halftone-bold/; send visitors (and any #section) straight there -->
+<meta http-equiv="refresh" content="0; url=v2b-halftone-bold/">
+<link rel="canonical" href="v2b-halftone-bold/">
+<script>location.replace('v2b-halftone-bold/' + location.hash);</script>
+<style>body { margin: 0; background: #02051A; color: #fff; font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; } a { color: #88A2F2; }</style>
 </head>
 <body>
-<main class="wrap">
-  <div class="top"><span class="eyebrow">Tomas Alvarez · portfolio rebuild</span>
-    <button class="theme-toggle" aria-label="Toggle light/dark mode" onclick="var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('theme',d.dataset.theme)}catch(e){}">
-      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
-  </div>
-  <h1>Four directions</h1>
-  <p class="lead">Same content and layout system in each: clean type, large stacked project cards, an About/skills section, and a light/dark toggle that follows your system by default. What changes is the motion. Mix and match is welcome.</p>
-  <div class="grid">
-    <a class="card" href="v1-swirl/index.html"><span class="n">01</span><h2>Liquid Swirl</h2><p>A slow marbled whirlpool in your blues fills a rounded hero panel. It leans toward the cursor and has a faint halftone texture as a nod to your reference.</p><span class="font">Manrope</span></a>
-    <a class="card" href="v2-halftone/index.html"><span class="n">02</span><h2>Halftone Field</h2><p>A grid of dots swells in slow waves. The cursor acts like a magnifying lens, and clicking sends out a ripple. Dotted textures repeat on the project section.</p><span class="font">Space Grotesk</span></a>
-    <a class="card" href="v2b-halftone-bold/index.html" style="border-color:var(--accent)"><span class="n">02b · REFINED</span><h2>Halftone Bold</h2><p>Version 2 refined: dark by default, higher-contrast text, uppercase Archivo type, a solid blue About block, hard-shadow details and hexagonal halftone throughout. Projects can switch between Showcase, Detailed, Compact and List layouts.</p><span class="font">Archivo</span></a>
-    <a class="card" href="v3-stars/index.html"><span class="n">03</span><h2>Floating Stars</h2><p>Sticker-style outlined stars drift up the whole page with scroll parallax. The cursor pushes them away, and clicking empty space bursts out new ones.</p><span class="font">Plus Jakarta Sans</span></a>
-    <a class="card" href="v4-scroll/index.html"><span class="n">04</span><h2>Scroll Story</h2><p>Letter-by-letter name intro and a rotating role. The hero blurs away and a skills marquee reacts to scroll speed. The About text lights up as you read, and the project cards stack on top of each other.</p><span class="font">Inter Tight</span></a>
-  </div>
-  <div class="swatches"><i style="background:#072BF2"></i><i style="background:#2256F2"></i><i style="background:#5C82F2"></i><i style="background:#88A2F2"></i><i style="background:#C2CEF2"></i></div>
-</main>
+  <p><a href="v2b-halftone-bold/">Continue to Tomas Alvarez's portfolio</a></p>
 </body>
 </html>

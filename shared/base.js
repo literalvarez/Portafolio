@@ -16,18 +16,18 @@
     },
     projects: [
       // Details below come from the project pages on the current Wix site
-      { title: 'Atomic Overdrive', genre: '3D Third Person Online Racing Game', role: 'Designer & Project Manager', img: 'atomic.jpg', href: '#',
+      { title: 'Atomic Overdrive', genre: '3D Third Person Online Racing Game', role: 'Level Designer & Project Manager', img: 'atomic.jpg', href: '#',
         team: '6 people', duration: '6 months',
         summary: 'Play as a Rollbot racing three laps through the retro-futuristic city of Atomaville. Magnetic spherical wheels let you stick to any surface: jump between walls, drift along ceilings and find your own path regardless of gravity.',
         highlights: ['Built a spline-based track creation pipeline from 2D SVG layouts', 'Designed and balanced the race track and lobby through constant playtesting', 'Led a team of 6 audio collaborators and composed 2 songs'],
-        tools: ['Unity', 'FMOD', 'HacknPlan', 'Illustrator', 'Maya', 'Unity VFX & Shader Graph'] },
-      { title: 'SAPO', genre: 'Top Down 3D Bullet Hell Boss Fight', role: 'Combat Designer & Programmer', img: 'sapo.png', href: '#',
+        tools: ['Unity', 'FMOD', 'HacknPlan', 'Illustrator', 'Unity VFX & Shader Graph', 'Maya'] },
+      { title: 'SAPO', genre: 'Top-Down 3D Bullet Hell Boss Fight', role: 'Combat Designer & Programmer', img: 'sapo.png', href: '#',
         team: '4 people', duration: '4 months',
         summary: 'Play as Jaime the frog and defeat the Yakuza Crane by dodging and attacking with your poisonous tongue. Built around aggressive play: stay close to the boss, stack poison and avoid its attacks.',
         highlights: ['Combat that rewards staying close, flipping the usual bullet hell strategy', 'Boomerang projectile that hits on the way out and back', 'Composed the menu and battle soundtrack and implemented audio'],
-        tools: ['FMOD'] },
+        tools: ['FMOD', 'Illustrator', 'Unity VFX & Shader Graph'] },
       { title: 'The Last Beat', genre: '2D Top-Down Rhythm Survivor Shooter', role: 'Solo Developer & Composer', img: 'lastbeat.png', href: '#', contain: true,
-        team: 'Solo', duration: '1 month',
+        team: 'Solo project', duration: '1 month',
         summary: 'A rhythm shooter where dashing, shooting and reloading only work on the beat. The music speeds up as you survive, new enemies arrive every minute, and upgrades help you keep up.',
         highlights: ['Rhythm-based combat system synced to the music', 'Progressive difficulty tuned through playtesting', 'Composed a 4-to-the-floor soundtrack that rises in BPM'],
         tools: ['Unity'] }
@@ -38,7 +38,7 @@
         text: 'One of two songs I composed and produced for Atomic Overdrive, written for the title screen.' },
       { id: 'runner', type: 'Music', title: 'Runner', from: 'Atomic Overdrive', use: 'Lobby theme', img: 'atomic.jpg', audio: '', yt: 'FarF1LeNlQE',
         text: 'The second Atomic Overdrive track, playing in the lobby while racers get ready.' },
-      { id: 'sapo-menu', type: 'Music', title: 'Main Menu', from: 'SAPO', use: 'Menu theme', img: 'sapo.png', audio: '', yt: 'eI7mKubUIAI',
+      { id: 'sapo-menu', type: 'Music', title: 'Menu', from: 'SAPO', use: 'Menu theme', img: 'sapo.png', audio: '', yt: 'eI7mKubUIAI',
         text: 'Part of the musical identity I helped define for SAPO, one of its two core tracks.' },
       { id: 'sapo-battle', type: 'Music', title: 'Battle', from: 'SAPO', use: 'Boss fight theme', img: 'sapo.png', audio: '', yt: 'Acw1nw_gjHw',
         text: 'The track behind the fight with the Yakuza Crane, composed, mixed and mastered for the boss battle.' },
@@ -52,7 +52,7 @@
       // Game jam games: shown as itch.io cards (img = still for the home scroller, cover = what the Hobbies page shows)
       { id: 'moonless-night', type: 'Game jams', title: 'Moonless Night', from: 'AMIX Game Jam 2026', use: '2D top-down survival', img: 'jams/moonless-night.jpg', cover: 'jams/moonless-night.gif', link: 'https://saraqgames.itch.io/moonless-night', role: 'Game Design, Code, VFX & Lighting', team: 'with _saraqg & seuhans',
         text: 'Read the signals that warn where the UFOs are coming from to avoid being abducted, while dodging the snails that never stop following you.' },
-      { id: 'my-lover-is-a-storm', type: 'Game jams', title: 'My Lover Is A Storm', from: 'Brackeys Game Jam 2024.2', use: 'Bullet hell · Visual novel', img: 'jams/my-lover-is-a-storm.png', link: 'https://fuann.itch.io/my-lover-is-a-storm', role: 'Game Design, Audio Programming', team: 'with Fuan & dreimer64', pixel: true,
+      { id: 'my-lover-is-a-storm', type: 'Game jams', title: 'My Lover Is A Storm', from: 'Brackeys Game Jam 2024.2', use: 'Bullet hell · Visual novel', img: 'jams/my-lover-is-a-storm.png', link: 'https://fuann.itch.io/my-lover-is-a-storm', role: 'Game Design, Audio & Programming', team: 'with Fuan & dreimer64', pixel: true,
         text: 'A chaotic bullet hell where you chase after the one who got away, with visual novel scenes between battles where your choices decide the fate of your love.' }
     ],
     skills: [
@@ -164,11 +164,6 @@
     ];
     document.body.insertAdjacentHTML('beforeend', `<nav class="contact-dock" aria-label="Contact">${items.map(([k, href, label]) =>
       `<a href="${href}" ${k === 'email' ? '' : 'target="_blank" rel="noopener"'} aria-label="${label}" data-tip="${label}">${ico[k]}</a>`).join('')}</nav>`);
-  };
-  /* ---------- Version switcher (drafts only) ---------- */
-  window.renderVersionPill = function (current) {
-    const v = [['v1-swirl', 'Swirl'], ['v2-halftone', 'Halftone'], ['v2b-halftone-bold', 'Halftone Bold'], ['v3-stars', 'Stars'], ['v4-scroll', 'Scroll']];
-    document.body.insertAdjacentHTML('beforeend', `<div class="version-pill"><a href="../index.html">All</a>${v.map(([d, n], i) => `<a href="../${d}/index.html" class="${d === current ? 'on' : ''}">${['1','2','2b','3','4'][i]}. ${n}</a>`).join('')}</div>`);
   };
 
   /* ---------- Reveal on scroll ---------- */

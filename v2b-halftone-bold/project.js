@@ -3,7 +3,6 @@
 window.initProjectPage = function ({ gallery = [] } = {}) {
   renderFooter();
   renderContactDock();
-  renderVersionPill('v2b-halftone-bold');
   initReveal();
 
   // ---------- Lazy YouTube embeds: a thumbnail until clicked ----------

@@ -25,18 +25,6 @@
   </div>
 </section>
 
-<section class="statement" id="about">
-  <div class="wrap">
-    <span class="eyebrow reveal">About</span>
-    <h2 class="reveal"><span>Fun.</span><span>Cohesive.</span><span>Memorable.</span></h2>
-    <div class="cols">
-      <p class="reveal" data-delay="1">Game Designer &amp; Developer based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive, and memorable.</p>
-      <p class="reveal" data-delay="2">Since 2018 I've been building skills across Design, Programming, Production, Art and Audio, because understanding how a game comes together as a whole makes me a better designer for every part of it.</p>
-    </div>
-    <a class="btn resume reveal" data-delay="3" href="https://canva.link/gnh4h8pgqpoa1g2" target="_blank" rel="noopener">View my resume <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-  </div>
-</section>
-
 <section class="projects" id="work">
   <div class="wrap">
     <div class="projects-head">
@@ -67,11 +55,52 @@
   <div class="pg-track" id="pgTrack"></div>
 </section>
 
+<section class="statement" id="about">
+  <div class="wrap about-grid">
+    <!-- Photo: assets/me.webp (portrait, cropped to 4:5 by the frame) -->
+    <figure class="about-photo reveal">
+      <img src="../assets/me.webp" alt="Portrait of Tomas Alvarez outdoors in Vancouver" onerror="this.remove()">
+      <span class="ph">Your photo here</span>
+    </figure>
+    <div class="about-body">
+      <h2 class="about-title reveal">About</h2>
+      <p class="reveal" data-delay="1">Game Designer &amp; Developer from Medellín, Colombia, now based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive and memorable.</p>
+      <p class="reveal" data-delay="1">Since 2018 I've been building skills across Design, Programming, Production, Art and Audio, because understanding how a game comes together as a whole makes me a better designer for every part of it.</p>
+      <p class="reach-line reveal" data-delay="2">Feel free to reach out! I'd love to talk about games, music, or any project you have in mind.</p>
+      <div class="reach-actions reveal" data-delay="2">
+        <a class="btn" href="https://www.linkedin.com/in/gdtomasalvarez/" target="_blank" rel="noopener">LinkedIn <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <a class="btn ghost" href="https://canva.link/gnh4h8pgqpoa1g2" target="_blank" rel="noopener">Resume <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <script src="../shared/base.js"></script>
 <script>
   renderFooter();
   renderContactDock();
+
+  // "About" sits at the bottom of the page: when it's linked to (nav or #about in the address), centre it on screen
+  // instead of jumping to the very bottom. A little space under the footer lets it actually reach the middle.
+  (function () {
+    const about = document.getElementById('about');
+    const centre = smooth => {
+      const r = about.getBoundingClientRect();
+      const target = scrollY + r.top + r.height / 2 - innerHeight / 2;
+      const needed = target + innerHeight - document.documentElement.scrollHeight;
+      document.body.style.paddingBottom = needed > 0 ? needed + 'px' : '';
+      scrollTo({ top: target, behavior: smooth && !reducedMotion ? 'smooth' : 'auto' });
+    };
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href$="#about"]');
+      if (!a) return;
+      e.preventDefault();
+      history.replaceState(null, '', '#about');
+      centre(true);
+    });
+    if (location.hash === '#about') addEventListener('load', () => centre(false));
+  })();
 
   // ---------- Hobbies scroller ----------
   (function () {
@@ -187,7 +216,6 @@
     addEventListener('resize', () => moveThumb(buttons.find(b => b.classList.contains('on'))));
     document.fonts?.ready.then(() => moveThumb(buttons.find(b => b.classList.contains('on'))));
   })();
-  renderVersionPill('v2b-halftone-bold');
   initReveal();
 
 

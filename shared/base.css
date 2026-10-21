@@ -206,19 +206,6 @@ section { position: relative; }
 .reveal[data-delay="3"] { transition-delay: .24s; }
 .reveal[data-delay="4"] { transition-delay: .32s; }
 
-/* Version switcher (for comparing drafts only) */
-.version-pill {
-  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 60;
-  display: flex; align-items: center; gap: 4px; padding: 5px;
-  background: color-mix(in srgb, var(--surface) 85%, transparent);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow);
-  max-width: calc(100vw - 24px); overflow-x: auto; scrollbar-width: none;
-  font-size: 13px; font-weight: 600;
-}
-.version-pill a { padding: 7px 12px; border-radius: 999px; color: var(--muted); white-space: nowrap; }
-.version-pill a:hover { color: var(--text); }
-.version-pill a.on { background: var(--accent); color: var(--on-accent); }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }

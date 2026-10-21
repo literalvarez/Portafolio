@@ -48,7 +48,7 @@
     margin: 24px 0 0; font-weight: 800; letter-spacing: -.04em; line-height: .9;
     font-size: clamp(52px, 8.6vw, 124px); text-transform: uppercase;
   }
-  .hero h1 .blue { color: var(--accent); }
+  .hero h1 .blue { color: inherit; }   /* whole name in the main text colour (white in dark mode) */
   .hero-bottom {
     margin-top: clamp(30px, 4vw, 48px);
     display: flex; gap: 22px; align-items: stretch; flex-wrap: wrap;
@@ -57,7 +57,7 @@
     margin: 0; max-width: 460px; color: var(--text); font-size: clamp(18px, 1.7vw, 21px); font-weight: 500; line-height: 1.45;
     padding: 4px 0 4px 20px; border-left: 4px solid var(--accent);
   }
-  .lede b { color: var(--accent-strong); font-weight: 700; }
+  .lede b { color: var(--accent); font-weight: 700; }   /* same blue the name used to have */
   .btn {
     display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px;
     padding: 16px 24px; border-radius: 12px; background: var(--accent); color: var(--on-accent);
@@ -97,9 +97,6 @@
   .statement h2 span { display: block; }
   .statement h2 span:nth-child(2) { color: var(--blue-5); }
   .statement h2 span:nth-child(3) { color: transparent; -webkit-text-stroke: 2px #fff; }
-  .statement .cols { margin-top: clamp(32px, 5vw, 56px); display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; max-width: 980px; }
-  .statement p { margin: 0; font-size: clamp(17px, 1.6vw, 20px); color: #fff; opacity: .92; }
-  @media (max-width: 760px) { .statement .cols { grid-template-columns: 1fr; } }
 
   /* ---------- Projects ---------- */
   .projects { position: relative; }
@@ -326,3 +323,34 @@
     --shadow: 0 20px 50px -26px rgba(7, 43, 242, .35);
   }
   :root[data-theme="light"] .nav.scrolled { background: color-mix(in srgb, var(--bg) 82%, transparent); }
+
+
+  /* ---------- About: one section, photo + text + contact ---------- */
+  .statement { margin-bottom: clamp(48px, 6vw, 80px); }
+  .statement p { margin: 0; font-size: clamp(17px, 1.6vw, 20px); color: #fff; opacity: .92; }
+  .about-grid { display: grid; grid-template-columns: minmax(220px, 340px) minmax(0, 620px); gap: clamp(32px, 6vw, 80px); align-items: center; justify-content: center; }
+  .about-photo {
+    position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden;
+    border: 3px solid #fff; box-shadow: 10px 10px 0 var(--blue-1);
+    background:
+      radial-gradient(circle, rgba(255,255,255,.35) 1.6px, transparent 2.2px) 0 0 / 14px 24.2px,
+      radial-gradient(circle, rgba(255,255,255,.35) 1.6px, transparent 2.2px) 7px 12.1px / 14px 24.2px,
+      var(--blue-1);
+  }
+  .about-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; z-index: 1; }
+  .about-photo .ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+  .statement .about-title { margin: 0 0 16px; font-size: clamp(30px, 3.6vw, 44px); font-weight: 900; text-transform: uppercase; letter-spacing: -.03em; line-height: 1; }
+  .about-body p { margin: 0 0 14px; }
+  .about-body .reach-line { margin-top: 22px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,.3); font-weight: 600; opacity: 1; }
+  .reach-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .statement .reach-actions .btn, :root[data-theme="dark"] .statement .reach-actions .btn {
+    padding: 10px 16px; font-size: 14px; border-radius: 10px; gap: 8px;
+    background: #fff; color: var(--blue-1); box-shadow: 3px 3px 0 var(--blue-1);
+  }
+  .statement .reach-actions .btn:hover { box-shadow: 5px 5px 0 var(--blue-1); }
+  .statement .reach-actions .btn.ghost, :root[data-theme="dark"] .statement .reach-actions .btn.ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.7); box-shadow: none; }
+  .statement .reach-actions .btn.ghost:hover { background: #fff; color: var(--blue-1); box-shadow: 3px 3px 0 var(--blue-1); }
+  @media (max-width: 760px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo { max-width: 260px; }
+  }
