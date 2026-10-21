@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" data-home="index.html" data-hobbies="hobbies.html" data-dock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atomic Overdrive · Tomas Alvarez</title>
+<meta name="description" content="Atomic Overdrive: a 3D third person online racing game. Level design, track pipeline and audio by Tomas Alvarez.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="project.css">
+</head>
+<body id="top">
+
+<header class="p-hero">
+  <div class="bg"><img src="../assets/atomic/hero.jpg" alt="Atomic Overdrive gameplay: racing toward the start line through Atomaville"></div>
+  <div class="wrap">
+    <a class="back" href="index.html#work"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All projects</a>
+    <div class="intro-anim">
+      <h1>Atomic Overdrive</h1>
+      <img class="p-logo" src="../assets/atomic/logo.png" alt="Atomic Overdrive logo">
+      <p class="p-genre">3D Third Person Online Racing Game</p>
+      <div class="p-actions">
+        <a class="btn" href="https://vfs-gdpg.itch.io/atomic-overdrive" target="_blank" rel="noopener">Play on itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+    <dl class="facts reveal">
+      <div><dt>Role</dt><dd>Level Designer &amp; Project Manager</dd></div>
+      <div><dt>Team</dt><dd>6 people</dd></div>
+      <div><dt>Duration</dt><dd>6 months</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="wrap p-body">
+  <nav class="toc" aria-label="On this page">
+    <span>On this page</span>
+    <a href="#overview">Overview</a>
+    <a href="#my-work">My work</a>
+    <a href="#tools">Tools</a>
+    <a href="#track-design">Track design</a>
+    <a href="#modular">Modular pieces</a>
+    <a href="#audio">Game audio</a>
+    <a href="#learnings">Learnings</a>
+  </nav>
+
+  <main>
+    <section class="chapter" id="overview">
+      <span class="eyebrow reveal">Overview</span>
+      <h2 class="reveal">Race on any surface</h2>
+      <p class="lead reveal">Play as a Rollbot in a racing course consisting of 3 laps, which lies within the retro-futuristic city of Atomaville.</p>
+      <p class="reveal">These competitive Rollbots use their magnetic spherical wheel to stick to surfaces and explore different paths regardless of the gravity. Jump between walls, drift along ceilings and roll along nearly any surface at high speeds.</p>
+      <div class="reveal" style="margin-top:28px"><button class="yt" data-id="Xt8CtyaPIJw" aria-label="Play the Atomic Overdrive trailer"><span class="cap">Pitch &amp; Play trailer</span></button></div>
+    </section>
+
+    <section class="chapter" id="my-work">
+      <span class="eyebrow reveal">My work</span>
+      <h2 class="reveal">Level design &amp; production</h2>
+      <p class="reveal">As level designer and project manager, my responsibilities included:</p>
+      <ul class="duties reveal">
+        <li>Created a track design pipeline</li>
+        <li>Designing, building and iterating on the race track &amp; lobby</li>
+        <li>Planning, managing and supporting the team using HacknPlan</li>
+        <li>Working closely with artists, designing the environment and modeling assets to set-dress the world</li>
+        <li>Lighting and post-processing</li>
+        <li>Playtesting sessions, collecting feedback and balancing</li>
+        <li>Tuning the player stats, mechanics and catch-up mechanics</li>
+        <li>Working with a team of audio collaborators, implementing sound in FMOD</li>
+        <li>Composed 2 songs for the game</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="tools">
+      <span class="eyebrow reveal">Tools</span>
+      <h2 class="reveal">What I worked with</h2>
+      <div class="tools reveal">
+        <div class="tool"><b>Unity</b><span>Engine &amp; track splines</span></div>
+        <div class="tool"><b>FMOD</b><span>Audio implementation</span></div>
+        <div class="tool"><b>HacknPlan</b><span>Project management</span></div>
+        <div class="tool"><b>Illustrator</b><span>2D track layouts</span></div>
+        <div class="tool"><b>Unity VFX &amp; Shader Graph</b><span>VFX &amp; screen effects</span></div>
+        <div class="tool"><b>Maya</b><span>3D modeling for blockouts &amp; set dressing</span></div>
+      </div>
+    </section>
+
+    <section class="chapter" id="track-design">
+      <span class="eyebrow reveal">Track design</span>
+      <h2 class="reveal">From SVG to spline</h2>
+      <div class="two">
+        <div class="reveal">
+          <h3>Track design</h3>
+          <p><strong>Designed, iterated, and balanced</strong> the race track from initial prototype to final version, continuously playtesting and incorporating player feedback throughout development.</p>
+          <p>Collaborated closely with the artist to set dress and finalize the visual presentation of the track.</p>
+        </div>
+        <div class="reveal" data-delay="1">
+          <h3>Track creation pipeline</h3>
+          <p>Designed tracks in 2D as SVG layouts, imported them into Unity, and converted them into spline paths to procedurally generate the final 3D track geometry.</p>
+        </div>
+      </div>
+
+      <div class="process reveal">
+        <div class="stage" id="stage">
+          <img alt="">
+          <span class="count"></span>
+          <button class="nav-btn prev" aria-label="Previous image"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="nav-btn next" aria-label="Next image"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+        <div class="bar"><i></i></div>
+        <div class="caption"><b></b><span></span></div>
+      </div>
+    </section>
+
+    <section class="chapter" id="modular">
+      <span class="eyebrow reveal">Modular track pieces</span>
+      <h2 class="reveal">Built to iterate fast</h2>
+      <p class="reveal">Developed a modular track creation pipeline driven by a spline system, enabling rapid iteration and scalable production.</p>
+      <div class="reveal" style="margin-top:24px"><button class="yt" data-id="HkW1sdmShzA" aria-label="Play the modular track pieces video"><span class="cap">Modular track pieces</span></button></div>
+    </section>
+
+    <section class="chapter" id="audio">
+      <span class="eyebrow reveal">Game audio</span>
+      <h2 class="reveal">Sound lead &amp; composer</h2>
+      <p class="reveal">Coordinated a team of 6 audio collaborators, facilitating communication and meetings to produce sound effects and music aligned with the game's artistic direction.</p>
+      <p class="reveal">Integrated and iterated on audio systems using FMOD and code to ensure proper implementation in-game, and composed and produced 2 songs for the game: <strong>Away</strong> for the title screen and <strong>Runner</strong> for the lobby.</p>
+      <div class="stats reveal">
+        <div class="stat"><b>6</b><span>Audio collaborators</span></div>
+        <div class="stat"><b>FMOD</b><span>Audio integration</span></div>
+        <div class="stat"><b>2</b><span>Original songs</span></div>
+      </div>
+      <div class="two" style="margin-top:28px">
+        <div class="reveal"><button class="yt" data-id="S2U2jHfkpVc" aria-label="Play Away"><span class="cap">Away · Title screen</span></button></div>
+        <div class="reveal" data-delay="1"><button class="yt" data-id="FarF1LeNlQE" aria-label="Play Runner"><span class="cap">Runner · Lobby</span></button></div>
+      </div>
+    </section>
+
+    <section class="chapter" id="learnings">
+      <span class="eyebrow reveal">Learnings &amp; experience</span>
+      <h2 class="reveal">Wearing many hats</h2>
+      <p class="lead reveal">In a team of six, we all covered more than one discipline. Alongside level design and production, I helped out wherever the game needed it, and it taught me a lot about how each part of the pipeline affects the others.</p>
+      <div class="hats">
+        <div class="hat reveal"><h3>VFX</h3><p>Created visual effects to support gameplay feedback and the game's retro-futuristic look.</p></div>
+        <div class="hat reveal" data-delay="1"><h3>Music</h3><p>Composed and produced Away and Runner, setting the mood for the title screen and the lobby.</p></div>
+        <div class="hat reveal"><h3>Sound effects</h3><p>Implemented SFX in FMOD and hooked them into gameplay through code, iterating until they felt right in-game.</p></div>
+        <div class="hat reveal" data-delay="1"><h3>Lighting &amp; post-processing</h3><p>Baked lights, set up post-processing volumes, and tuned screen effects for the game and the feeling of speed.</p></div>
+      </div>
+      <h3 class="reveal" style="margin-top:40px">What I took away</h3>
+      <ul class="duties takeaways reveal">
+        <li>Switching roles taught me the real cost of each request I make to art, audio and code.</li>
+        <li>Clear plans and regular check-ins keep a small team aligned, especially across disciplines.</li>
+        <li>Being able to cover gaps keeps a small project moving when time is short.</li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<section class="play-band">
+  <div class="wrap">
+    <div><span class="eyebrow">Try it yourself</span><h2>Play Atomic Overdrive</h2></div>
+    <a class="btn" href="https://vfs-gdpg.itch.io/atomic-overdrive" target="_blank" rel="noopener">Play on itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+  </div>
+</section>
+
+<div class="wrap next-proj">
+  <a class="back" style="color:var(--muted);margin:0" href="index.html#work"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All projects</a>
+  <a class="next" href="sapo.html"><img src="../assets/sapo.png" alt=""><span><small>Next project</small><strong>SAPO</strong></span></a>
+</div>
+
+<div class="lightbox" id="lightbox"><img alt=""></div>
+
+<script src="../shared/base.js"></script>
+<script src="project.js"></script>
+<script>
+  initProjectPage({
+    gallery: [
+      { t: 'Prototype track', c: 'Creation of different modular pieces, exploration of track shapes.' },
+      { t: '1st track 2D layout', c: '2D layout created in Illustrator, then exported as SVG to create splines in Unity.' },
+      { t: '1st track iteration', c: 'Exploration of player mechanics and pacing.' },
+      { t: '2nd track 2D layout', c: '2D layout created in Illustrator, then exported as SVG to create splines in Unity.' },
+      { t: '2nd track iteration', c: 'Less turns, slower pacing, give players moments to see each during the race.' },
+      { t: 'Final track layout', c: 'Shortened sections, accelerating the pacing of the race.' },
+      { t: 'Final track set dressing', c: 'Collaborated with artists building a retro futuristic city in the sky.' }
+    ].map((s, i) => ({ ...s, src: `../assets/atomic/track-${i + 1}.jpg` }))
+  });
+</script>
+</body>
+</html>

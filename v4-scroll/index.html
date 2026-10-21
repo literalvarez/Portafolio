@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomas Alvarez</title>
+<meta name="description" content="Tomas Alvarez, Game Designer based in Vancouver, Canada.">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+  :root { --font: 'Inter Tight', system-ui, sans-serif; }
+  html { scroll-behavior: auto; }
+
+  .progress { position: fixed; left: 0; top: 0; height: 3px; width: 100%; z-index: 70; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+
+  /* ----- Hero ----- */
+  .hero { height: 135vh; }
+  .hero-sticky {
+    position: sticky; top: 0; height: 100svh; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-inner { will-change: transform, opacity, filter; }
+  .hero .role {
+    font-size: clamp(18px, 2.2vw, 26px); font-weight: 500; color: var(--muted);
+    display: flex; gap: .35em; align-items: baseline; height: 1.3em;
+  }
+  .rotator { position: relative; display: inline-block; color: var(--accent); font-weight: 700; overflow: hidden; height: 1.3em; }
+  .rotator span { display: block; transition: transform .7s cubic-bezier(.7,0,.2,1); }
+  .hero h1 {
+    margin: 10px 0 0; font-weight: 800; letter-spacing: -.06em; line-height: .86;
+    font-size: clamp(64px, 15.5vw, 240px); white-space: nowrap;
+  }
+  .hero h1 .word { display: block; }
+  .hero h1 .ch { display: inline-block; transform: translateY(110%) rotate(8deg); opacity: 0; animation: ch 1s cubic-bezier(.2,.8,.2,1) forwards; }
+  .hero h1 .word:nth-child(2) { color: var(--accent); }
+  @keyframes ch { to { transform: none; opacity: 1; } }
+  .hero-meta {
+    margin-top: clamp(26px, 4vw, 48px); display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: end;
+    opacity: 0; animation: fade 1s .9s forwards;
+  }
+  .hero-meta p { margin: 0; max-width: 420px; color: var(--muted); }
+  .hero-meta .scroll { font-size: 14px; font-weight: 600; display: inline-flex; gap: 10px; align-items: center; }
+  .hero-meta .scroll i { width: 1px; height: 36px; background: var(--line); position: relative; overflow: hidden; }
+  .hero-meta .scroll i::after { content: ""; position: absolute; left: 0; top: -36px; width: 1px; height: 36px; background: var(--accent); animation: drop 1.8s infinite; }
+  @keyframes drop { to { top: 36px; } }
+  @keyframes fade { to { opacity: 1; } }
+
+  /* ----- Marquee band ----- */
+  .band { position: relative; z-index: 2; padding: 10px 0; margin-top: -22vh; }
+  .marquee {
+    background: var(--blue-2); color: #fff; padding: 22px 0; overflow: hidden;
+    transform: rotate(-2deg) scale(1.06); will-change: transform;
+  }
+  .marquee .track { display: flex; width: max-content; will-change: transform; }
+  .marquee .item { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font-size: clamp(26px, 4vw, 48px); font-weight: 700; letter-spacing: -.03em; white-space: nowrap; }
+  .marquee .item svg { width: .7em; height: .7em; flex: none; }
+
+  /* ----- Statement (words light up on scroll) ----- */
+  .statement { padding: clamp(100px, 16vw, 200px) 0 clamp(60px, 8vw, 100px); }
+  .statement p {
+    margin: 18px 0 0; font-size: clamp(30px, 4.6vw, 62px); line-height: 1.12; letter-spacing: -.035em; font-weight: 600;
+  }
+  .statement .w { opacity: .14; transition: opacity .25s linear; }
+  .statement .w.hl { color: var(--accent); }
+
+  /* ----- Skills row ----- */
+  .skills-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 40px; }
+  @media (max-width: 860px) { .skills-row { grid-template-columns: 1fr 1fr; } }
+
+  /* ----- Sticky stacked projects ----- */
+  .projects { padding-bottom: 0; }
+  .stack { position: relative; }
+  .stack-item { position: sticky; top: 84px; padding-bottom: 40px; }
+  .stack-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 14px;
+    box-shadow: var(--shadow); transform-origin: 50% 0; will-change: transform, filter;
+  }
+  .stack-card .project-media { border: 0; box-shadow: none; border-radius: 18px; aspect-ratio: 16/8.2; }
+  .stack-card .project-media img { transform: scale(1.12); transition: none; will-change: transform; }
+  .stack-card .project-info { padding: 18px 10px 8px; }
+  .stack-spacer { height: 30vh; }
+  @media (max-width: 640px) { .stack-item { top: 70px; } .stack-card .project-media { aspect-ratio: 4/3; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1 .ch, .hero-meta { animation: none; opacity: 1; transform: none; }
+    .statement .w { opacity: 1; }
+  }
+</style>
+</head>
+<body id="top">
+<div class="progress"></div>
+
+<section class="hero">
+  <div class="hero-sticky">
+    <div class="wrap hero-inner">
+      <div class="role">I'm a <span class="rotator"><span>Game Designer</span><span>Combat Designer</span><span>Programmer</span><span>Composer</span><span>Game Designer</span></span></div>
+      <h1><span class="word" data-split>Tomas</span><span class="word" data-split>Alvarez</span></h1>
+      <div class="hero-meta">
+        <p>Based in Vancouver, Canada. Making games that are fun, cohesive and memorable since 2018.</p>
+        <a class="scroll" href="#about"><i></i>Scroll to explore</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"><div class="marquee"><div class="track"></div></div></div>
+
+<section class="statement" id="about">
+  <div class="wrap">
+    <span class="eyebrow">About</span>
+    <p id="statement">Since 2018 I've been building skills across *Design, *Programming, *Art and *Production, because understanding how a game comes together as a whole makes me a better designer for every part of it.</p>
+    <div class="skills-row" id="skills"></div>
+  </div>
+</section>
+
+<section class="projects" id="work">
+  <div class="wrap">
+    <div class="projects-head">
+      <div><span class="eyebrow reveal">Selected work</span><h2 class="section-title reveal">Projects</h2></div>
+      <span class="count reveal">Scroll through 3 projects</span>
+    </div>
+    <div class="stack" id="stack"></div>
+    <div class="stack-spacer"></div>
+  </div>
+</section>
+
+<script src="../shared/base.js"></script>
+<script>
+  renderFooter();
+  renderVersionPill('v4-scroll');
+
+  // Split hero name into letters for the staggered intro
+  document.querySelectorAll('[data-split]').forEach((el, w) => {
+    el.innerHTML = [...el.textContent].map((c, i) => `<span class="ch" style="animation-delay:${.05 * i + w * .18}s">${c}</span>`).join('');
+  });
+
+  // Role rotator
+  (function () {
+    const spans = document.querySelectorAll('.rotator span');
+    const rot = document.querySelector('.rotator');
+    const fit = () => { rot.style.width = 'auto'; rot.style.width = Math.max(...[...spans].map(s => s.scrollWidth)) + 'px'; };
+    fit(); document.fonts?.ready.then(fit);
+    let i = 0;
+    if (!reducedMotion) setInterval(() => {
+      i++;
+      spans.forEach(s => { s.style.transition = ''; s.style.transform = `translateY(${-i * 100}%)`; });
+      if (i === spans.length - 1) setTimeout(() => { i = 0; spans.forEach(s => { s.style.transition = 'none'; s.style.transform = 'none'; }); }, 800);
+    }, 2200);
+  })();
+
+  // Marquee content
+  const track = document.querySelector('.marquee .track');
+  const starSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6L2.5 9.3l6.6-.8z"/></svg>';
+  const words = ['Game Design', 'Combat Design', 'Programming', 'Art', 'Production', 'Music'];
+  const chunk = words.map(w => `<span class="item">${w}${starSvg}</span>`).join('');
+  track.innerHTML = chunk.repeat(4);
+
+  // Statement words
+  const st = document.getElementById('statement');
+  st.innerHTML = st.textContent.split(' ').map(w => w.startsWith('*') ? `<span class="w hl">${w.slice(1)}</span>` : `<span class="w">${w}</span>`).join(' ');
+  const statementWords = [...st.querySelectorAll('.w')];
+
+  // Skills + stacked projects
+  document.getElementById('skills').innerHTML = SITE.skills.map(SITE.html.skillCard).join('');
+  document.getElementById('stack').innerHTML = SITE.projects.map((p, i) => `
+    <div class="stack-item" style="top:${84 + i * 18}px">
+      <a class="stack-card project" href="${p.href}">
+        <div class="project-media${p.contain ? ' contain' : ''}"><img src="../assets/${p.img}" alt="${p.title} key art"></div>
+        <div class="project-info"><span class="num">0${i + 1}</span><h3>${p.title}</h3><span class="genre">${p.genre}</span><span class="role">${p.role}</span></div>
+      </a>
+    </div>`).join('');
+  initReveal();
+
+  // ---------- Scroll engine ----------
+  const progress = document.querySelector('.progress');
+  const heroInner = document.querySelector('.hero-inner');
+  const hero = document.querySelector('.hero');
+  const marquee = document.querySelector('.marquee');
+  const cards = [...document.querySelectorAll('.stack-card')];
+  const imgs = cards.map(c => c.querySelector('img'));
+  let mx = 0, lastY = scrollY, vel = 0, skew = 0;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+  function tick() {
+    requestAnimationFrame(tick);
+    const y = scrollY, vh = innerHeight;
+    const max = document.documentElement.scrollHeight - vh;
+    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (reducedMotion) return;
+
+    // hero: shrink, blur and fade as you scroll past
+    const hp = clamp(y / (vh * .8), 0, 1);
+    heroInner.style.transform = `scale(${1 - hp * .18}) translateY(${-hp * 40}px)`;
+    heroInner.style.opacity = 1 - hp * 1.1;
+    heroInner.style.filter = `blur(${hp * 8}px)`;
+
+    // marquee: constant drift, sped up and skewed by scroll velocity
+    vel += ((y - lastY) - vel) * .2; lastY = y;
+    skew += (clamp(vel * .25, -10, 10) - skew) * .15;
+    mx -= 1 + Math.abs(vel) * .35;
+    const half = track.scrollWidth / 4;
+    if (-mx > half) mx += half;
+    track.style.transform = `translateX(${mx}px)`;
+    marquee.style.transform = `rotate(-2deg) scale(1.06) skewX(${-skew}deg)`;
+
+    // statement: light words up in reading order
+    const r = st.getBoundingClientRect();
+    const sp = clamp((vh * .85 - r.top) / (r.height + vh * .35), 0, 1);
+    const lit = Math.floor(sp * statementWords.length * 1.05);
+    statementWords.forEach((w, i) => w.style.opacity = i < lit ? 1 : .14);
+
+    // stacked cards: as the next card slides over, push the current one back
+    cards.forEach((c, i) => {
+      const next = cards[i + 1];
+      const cr = c.getBoundingClientRect();
+      let p = 0;
+      if (next) {
+        const nr = next.getBoundingClientRect();
+        p = clamp(1 - (nr.top - cr.top) / (cr.height), 0, 1);
+      }
+      c.style.transform = `scale(${1 - p * .08})`;
+      c.style.filter = `brightness(${1 - p * .35})`;
+      // image parallax inside its frame
+      const ip = clamp((vh - cr.top) / (vh + cr.height), 0, 1);
+      imgs[i].style.transform = `scale(1.12) translateY(${(ip - .5) * -6}%)`;
+    });
+  }
+  tick();
+</script>
+</body>
+</html>

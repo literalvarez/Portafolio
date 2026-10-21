@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" data-home="index.html" data-hobbies="hobbies.html" data-dock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Last Beat · Tomas Alvarez</title>
+<meta name="description" content="The Last Beat: a 2D top-down rhythm survivor shooter. Solo project by Tomas Alvarez: design, programming, art and music.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="project.css">
+<style>
+  /* The Last Beat tweaks: the logo is a solid red card, shown as a sticker that pulses on the beat */
+  .p-logo.card { width: min(300px, 64vw); border-radius: 16px; border: 3px solid #fff; box-shadow: 8px 8px 0 #b00010; filter: none; animation: beat .5s ease-out infinite; transform-origin: 30% 60%; }
+  @keyframes beat { 0% { transform: scale(1.045); box-shadow: 10px 10px 0 #b00010; } 35%, 100% { transform: scale(1); box-shadow: 8px 8px 0 #b00010; } }
+  .beat-dots { display: flex; gap: 6px; margin-top: 18px; }
+  .beat-dots i { width: 12px; height: 12px; background: #ffd23f; border-radius: 2px; opacity: .25; animation: dot 2s steps(1) infinite; }
+  .beat-dots i:nth-child(2) { animation-delay: .5s; } .beat-dots i:nth-child(3) { animation-delay: 1s; } .beat-dots i:nth-child(4) { animation-delay: 1.5s; }
+  @keyframes dot { 0% { opacity: 1; } 25%, 100% { opacity: .25; } }
+  .enemies { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 40px; align-items: center; margin-top: 26px; }
+  .enemies img { width: 100%; border-radius: 16px; border: 1.5px solid var(--line); image-rendering: auto; }
+  .mechanics { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 30px; }
+  .mechanic { border-top: 2px solid var(--accent); padding-top: 16px; }
+  .mechanic h3 { font-size: 20px; }
+  .mechanic p { font-size: 16px !important; margin: 0 0 10px !important; }
+  .hats.rules { grid-template-columns: repeat(3, 1fr); margin-top: 16px; }
+  .duties li strong { color: var(--text); }
+  @media (max-width: 760px) { .mechanics, .enemies { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .hats.rules { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .p-logo.card, .beat-dots i { animation: none; } .beat-dots i { opacity: 1; } }
+</style>
+</head>
+<body id="top">
+
+<header class="p-hero">
+  <div class="bg"><img src="../assets/lastbeat/hero.jpg" alt="The Last Beat gameplay: the player surrounded by enemies with a glowing beat ring"></div>
+  <div class="wrap">
+    <a class="back" href="index.html#work"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All projects</a>
+    <div class="intro-anim">
+      <h1>The Last Beat</h1>
+      <div class="logo-wrap"><img class="p-logo card" src="../assets/lastbeat/logo.png" alt="The Last Beat logo"></div>
+      <div class="beat-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <p class="p-genre">2D Top-Down Rhythm Survivor Shooter</p>
+      <div class="p-actions">
+        <a class="btn" href="https://literalvarez.itch.io/thelastbeat" target="_blank" rel="noopener">Play on itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+    <dl class="facts reveal">
+      <div><dt>Role</dt><dd>Solo Developer &amp; Composer</dd></div>
+      <div><dt>Team</dt><dd>Solo project</dd></div>
+      <div><dt>Duration</dt><dd>1 month</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="wrap p-body">
+  <nav class="toc" aria-label="On this page">
+    <span>On this page</span>
+    <a href="#overview">Overview</a>
+    <a href="#my-work">My work</a>
+    <a href="#combat">Combat design</a>
+    <a href="#enemies">Enemies</a>
+    <a href="#audio">Game audio</a>
+    <a href="#learnings">Learnings</a>
+  </nav>
+
+  <main>
+    <section class="chapter" id="overview">
+      <span class="eyebrow reveal">Overview</span>
+      <h2 class="reveal">Every move on the beat</h2>
+      <p class="lead reveal">The Last Beat is a 2D top-down rhythm shooter where dashing, shooting and reloading only work on the beat.</p>
+      <p class="reveal">The music speeds up as you survive, new enemies arrive every minute, and upgrades help you keep up.</p>
+    </section>
+
+    <section class="chapter" id="my-work">
+      <span class="eyebrow reveal">My work</span>
+      <h2 class="reveal">A complete game, solo</h2>
+      <p class="reveal">As a solo developer, my main focus for this project was to:</p>
+      <ul class="duties reveal">
+        <li>Create and refine a rhythm-based combat system</li>
+        <li>Challenge myself to develop a complete game independently</li>
+        <li>Create an appealing visual style despite my limited 2D/3D art experience</li>
+        <li>Design and balance progressive difficulty through playtesting and feedback</li>
+        <li>Create VFX and audiovisual feedback to make combat feel impactful</li>
+        <li>Compose, mix, and master the soundtrack around the game's rhythm-based mechanics</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="combat">
+      <span class="eyebrow reveal">Combat design</span>
+      <h2 class="reveal">Synced to the music</h2>
+      <p class="reveal">Designed a rhythm-based combat system where player movement and attacks are synchronized with the music.</p>
+      <p class="reveal">Combat progressively becomes faster as the song changes, with new enemy types introduced every minute to increase the challenge. Players also gain experience to unlock upgrades, allowing them to improve their abilities and adapt to the increasing difficulty.</p>
+      <div class="mechanics">
+        <div class="mechanic reveal">
+          <h3>On the beat</h3>
+          <p>The player's core mechanics are built around rhythm: players can only execute actions like dashing, shooting, and reloading when they are on beat.</p>
+        </div>
+        <div class="mechanic reveal" data-delay="1">
+          <h3>Upgrades</h3>
+          <p>Players can get experience from killing enemies to upgrade their stats, to be able to face the increasing difficulty.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="enemies">
+      <span class="eyebrow reveal">Enemies</span>
+      <h2 class="reveal">Escalating waves</h2>
+      <div class="enemies">
+        <img class="reveal" src="../assets/lastbeat/enemies.png" alt="The Last Beat enemy types: orange squares of different sizes, plus purple, pink and red enemies">
+        <p class="reveal" data-delay="1">New enemy types are introduced every minute to increase the challenge.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="audio">
+      <span class="eyebrow reveal">Game audio</span>
+      <h2 class="reveal">Music &amp; sound</h2>
+      <div class="two">
+        <div class="reveal">
+          <h3>Music composition</h3>
+          <p>The music was designed to establish the game's musical identity and directly support its rhythm-based gameplay. The soundtrack follows a consistent 4-to-the-floor electronic style, creating a strong and predictable rhythmic foundation for combat.</p>
+          <p>Each track increases in BPM and intensity as the player progresses, matching the increasing difficulty of the game. This creates a clear sense of progression while keeping the music closely connected to the gameplay experience.</p>
+        </div>
+        <div class="reveal" data-delay="1">
+          <h3>Sound implementation</h3>
+          <p>Created and implemented all sound effects using Unity's audio system, ensuring that player actions, enemy interactions, combat, and gameplay events have clear and responsive audio feedback.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="learnings">
+      <span class="eyebrow reveal">Learnings &amp; experience</span>
+      <h2 class="reveal">Designing within limits</h2>
+      <p class="lead reveal">The Last Beat was created with a set of creative limitations, and working inside them shaped every decision I made.</p>
+      <h3 class="reveal" style="margin-top:30px">The rules</h3>
+      <div class="hats rules">
+        <div class="hat reveal"><h3>5 minutes</h3><p>The game had to last 5 minutes.</p></div>
+        <div class="hat reveal" data-delay="1"><h3>One hand</h3><p>It had to be playable with just 1 hand.</p></div>
+        <div class="hat reveal" data-delay="2"><h3>Something I love</h3><p>It had to be centered around something I love. I chose music.</p></div>
+      </div>
+      <h3 class="reveal" style="margin-top:40px">The process</h3>
+      <ul class="duties takeaways reveal">
+        <li><strong>Fun core actions:</strong> a big part of the process was finding how the player's core actions could be fun and entertaining.</li>
+        <li><strong>A living map:</strong> making elements move around the map, so the game feels more alive.</li>
+        <li><strong>Game feel:</strong> creating VFX and an upgrade system to give the player a sense of progression and create meaningful gameplay.</li>
+      </ul>
+      <h3 class="reveal" style="margin-top:40px">Scoping down</h3>
+      <p class="reveal">I had plans to create extra classes and weapons, each with a different beat attached to them, but they were out of scope for the time I had. I made an early decision to focus on smaller things and create a more polished game instead.</p>
+    </section>
+  </main>
+</div>
+
+<section class="play-band">
+  <div class="wrap">
+    <div><span class="eyebrow">Try it yourself</span><h2>Play The Last Beat</h2></div>
+    <a class="btn" href="https://literalvarez.itch.io/thelastbeat" target="_blank" rel="noopener">Play on itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+  </div>
+</section>
+
+<div class="wrap next-proj">
+  <a class="back" style="color:var(--muted);margin:0" href="sapo.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>SAPO</a>
+  <a class="next" href="atomic-overdrive.html"><img src="../assets/atomic.jpg" alt=""><span><small>Back to the first project</small><strong>Atomic Overdrive</strong></span></a>
+</div>
+
+<div class="lightbox" id="lightbox"><img alt=""></div>
+
+<script src="../shared/base.js"></script>
+<script src="project.js"></script>
+<script>initProjectPage();</script>
+</body>
+</html>

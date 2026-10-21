@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" data-hobbies="hobbies.html" data-dock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomas Alvarez</title>
+<meta name="description" content="Tomas Alvarez, Game Designer based in Vancouver, Canada.">
+<!-- Dark by default; the toggle still remembers a visitor's choice -->
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+<section class="hero">
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1><span class="line"><span>Tomas</span></span><span class="line"><span class="blue">Alvarez</span></span></h1>
+    <div class="hero-bottom fade-in">
+      <p class="lede">Designing and developing games that are <b>fun, cohesive and memorable</b>, bringing design, code, art and sound together into gameplay.</p>
+      <a class="btn" href="#work">See my work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="statement" id="about">
+  <div class="wrap">
+    <span class="eyebrow reveal">About</span>
+    <h2 class="reveal"><span>Fun.</span><span>Cohesive.</span><span>Memorable.</span></h2>
+    <div class="cols">
+      <p class="reveal" data-delay="1">Game Designer &amp; Developer based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive, and memorable.</p>
+      <p class="reveal" data-delay="2">Since 2018 I've been building skills across Design, Programming, Production, Art and Audio, because understanding how a game comes together as a whole makes me a better designer for every part of it.</p>
+    </div>
+    <a class="btn resume reveal" data-delay="3" href="https://canva.link/gnh4h8pgqpoa1g2" target="_blank" rel="noopener">View my resume <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+  </div>
+</section>
+
+<section class="projects" id="work">
+  <div class="wrap">
+    <div class="projects-head">
+      <div><span class="eyebrow reveal">Selected work</span><h2 class="section-title reveal">Projects</h2></div>
+      <div class="view-toggle reveal" role="tablist" aria-label="Project layout">
+        <span class="view-thumb"></span>
+        <button data-view="showcase" title="Showcase"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="11" rx="2"/><path d="M3 19h12"/></svg><span>Showcase</span></button>
+        <button data-view="detailed" title="Detailed"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="10" height="16" rx="2"/><path d="M16 6h5M16 10h5M16 14h3"/></svg><span>Detailed</span></button>
+      </div>
+    </div>
+    <div class="pv" id="projects"></div>
+  </div>
+</section>
+
+<section class="playground" id="hobbies">
+  <div class="wrap pg-head">
+    <div>
+      <span class="eyebrow reveal">Hobbies</span>
+      <h2 class="section-title reveal">Passion projects</h2>
+      <p class="reveal">Music, experiments and the other things I make for fun.</p>
+    </div>
+    <div class="pg-actions reveal">
+      <button class="pg-arrow" data-dir="-1" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="pg-arrow" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <a class="btn sm" href="hobbies.html">See all hobbies <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    </div>
+  </div>
+  <div class="pg-track" id="pgTrack"></div>
+</section>
+
+
+<script src="../shared/base.js"></script>
+<script>
+  renderFooter();
+  renderContactDock();
+
+  // ---------- Hobbies scroller ----------
+  (function () {
+    const track = document.getElementById('pgTrack');
+    // one icon per hobby category (falls back to the music bars)
+    const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+    const icons = {
+      'Music': '<span class="eq"><i></i><i></i><i></i><i></i><i></i></span>',
+      'Game jams': svg('<path d="M7.5 8h9a4.5 4.5 0 0 1 4.4 5.4l-.7 3.4a2 2 0 0 1-3.4 1l-2.3-2.3H9.5l-2.3 2.3a2 2 0 0 1-3.4-1l-.7-3.4A4.5 4.5 0 0 1 7.5 8z"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="15.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="17" cy="13.5" r=".6" fill="currentColor"/>'),
+      'Experiments': svg('<path d="M9.5 3h5M10.5 3v6L5.2 18.2A2 2 0 0 0 7 21h10a2 2 0 0 0 1.8-2.8L13.5 9V3"/><path d="M7.5 15h9"/>'),
+      'Visuals': svg('<circle cx="12" cy="12" r="3"/><path class="ring" d="M12 4.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15z"/>')
+    };
+    const icon = type => `<span class="pg-icon" data-type="${type}">${icons[type] || icons.Music}</span>`;
+    track.innerHTML = SITE.playground.map((p, i) => `
+      <a class="pg-card" href="hobbies.html#${p.id}" style="--i:${i}">
+        <img src="${/^https?:/.test(p.img) ? p.img : `../assets/${p.img}`}" alt="" loading="lazy" draggable="false">
+        <span class="pg-tag">${p.type}</span>
+        ${icon(p.type)}
+        <span class="pg-text"><b>${p.title}</b><small>${p.from} · ${p.use}</small></span>
+      </a>`).join('') + `
+      <a class="pg-card pg-more" href="hobbies.html">
+        <span class="pg-text"><b>See everything</b><small>Open hobbies</small></span>
+        <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg>
+      </a>`;
+
+    // arrows
+    document.querySelectorAll('.pg-arrow').forEach(b => b.addEventListener('click', () =>
+      track.scrollBy({ left: +b.dataset.dir * track.clientWidth * .7, behavior: 'smooth' })));
+
+    // drag to scroll with the mouse (touch already scrolls natively)
+    let down = false, startX = 0, startLeft = 0, moved = 0;
+    track.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse') return;
+      down = true; moved = 0; startX = e.clientX; startLeft = track.scrollLeft;
+    });
+    addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - startX; moved = Math.max(moved, Math.abs(dx));
+      if (moved > 6) track.classList.add('dragging');   // only a real drag blocks clicks on the cards
+      track.scrollLeft = startLeft - dx;
+    });
+    addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); });
+    // a drag shouldn't count as a click on the card underneath
+    track.addEventListener('click', e => { if (moved > 6) { e.preventDefault(); moved = 0; } }, true);
+
+    // cards tilt slightly with scroll velocity for a bit of life
+    let last = track.scrollLeft, tilt = 0;
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (reducedMotion) return;
+      const v = track.scrollLeft - last; last = track.scrollLeft;
+      tilt += (Math.max(-6, Math.min(6, v * .4)) - tilt) * .15;
+      if (Math.abs(tilt) > .01) track.style.setProperty('--tilt', tilt.toFixed(2) + 'deg');
+    })();
+  })();
+
+  // ---------- Project layouts + toggle ----------
+  (function () {
+    const list = document.getElementById('projects');
+    // projects that already have their own page
+    const pages = { 'Atomic Overdrive': 'atomic-overdrive.html', 'SAPO': 'sapo.html', 'The Last Beat': 'the-last-beat.html' };
+    const P = SITE.projects.map(p => ({ ...p, href: pages[p.title] || p.href }));
+    const arrow = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>';
+    const media = (p, extra = '') => `<div class="project-media${p.contain ? ' contain' : ''}"><img src="../assets/${p.img}" alt="${p.title} key art" loading="lazy">${extra}</div>`;
+
+    const views = {
+      // big 16:9 cards, short summary underneath
+      showcase: () => `<div class="project-list">${P.map((p, i) => `
+        <a class="project" href="${p.href}">
+          ${media(p, `<span class="view">View project ${arrow}</span>`)}
+          <div class="project-info">
+            <h3>${p.title}</h3><span class="genre">${p.genre}</span><span class="role">${p.role}</span>
+          </div>
+          <p class="summary">${p.summary}</p>
+        </a>`).join('')}</div>`,
+
+      // image beside a full write-up, alternating sides
+      detailed: () => `<div class="pl-detailed">${P.map((p, i) => `
+        <article class="d-row${i % 2 ? ' flip' : ''}">
+          <a class="project" href="${p.href}">${media(p, `<span class="view">View project ${arrow}</span>`)}</a>
+          <div class="d-body">
+            <div class="d-top"><div><h3>${p.title}</h3><span class="genre">${p.genre}</span></div></div>
+            <dl class="meta"><div><dt>Role</dt><dd>${p.role}</dd></div><div><dt>Team</dt><dd>${p.team}</dd></div><div><dt>Time</dt><dd>${p.duration}</dd></div></dl>
+            <p>${p.summary}</p>
+            <ul>${p.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+            <div class="d-foot"><div class="tags">${p.tools.map(t => `<span>${t}</span>`).join('')}</div><a class="btn sm" href="${p.href}">View project ${arrow}</a></div>
+          </div>
+        </article>`).join('')}</div>`,
+    };
+
+    const toggle = document.querySelector('.view-toggle');
+    const thumb = toggle.querySelector('.view-thumb');
+    const buttons = [...toggle.querySelectorAll('button')];
+    let current;
+    function moveThumb(b) { thumb.style.width = b.offsetWidth + 'px'; thumb.style.transform = `translateX(${b.offsetLeft - 4}px)`; }
+    function show(view, animate) {
+      if (view === current) return;
+      current = view;
+      buttons.forEach(b => { const on = b.dataset.view === view; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); if (on) moveThumb(b); });
+      try { localStorage.setItem('project-view', view); } catch (e) {}
+      const render = () => {
+        list.innerHTML = views[view]();
+        list.dataset.view = view;
+        // stagger items in
+        [...list.firstElementChild.children].forEach((el, i) => { el.style.setProperty('--d', i * 70 + 'ms'); el.classList.add('pv-in'); });
+        list.classList.remove('out');
+      };
+      if (animate && !reducedMotion) { list.classList.add('out'); setTimeout(render, 220); } else render();
+    }
+    buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.view, true)));
+    let saved = 'showcase'; try { saved = localStorage.getItem('project-view') || saved; } catch (e) {}
+    show(views[saved] ? saved : 'showcase', false);
+    addEventListener('resize', () => moveThumb(buttons.find(b => b.classList.contains('on'))));
+    document.fonts?.ready.then(() => moveThumb(buttons.find(b => b.classList.contains('on'))));
+  })();
+  renderVersionPill('v2b-halftone-bold');
+  initReveal();
+
+
+  // ---------- Hexagonal halftone dot field ----------
+  (function () {
+    const canvas = document.getElementById('dots');
+    const ctx = canvas.getContext('2d');
+    const GAP = 16, ROW = GAP * Math.sqrt(3) / 2;   // version 2 dots, on a true hex grid
+    let W, H, dpr, cols, rows, color;
+    const mouse = { x: -9999, y: -9999, sx: -9999, sy: -9999 };
+    const ripples = [];
+
+    function readColor() {
+      const cs = getComputedStyle(document.documentElement);
+      color = cs.getPropertyValue('--accent').trim() || '#2256F2';
+    }
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      const r = canvas.getBoundingClientRect();
+      W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(W / GAP) + 1; rows = Math.ceil(H / ROW) + 1;
+    }
+    readColor(); resize();
+    addEventListener('resize', resize);
+    addEventListener('themechange', () => requestAnimationFrame(readColor));
+
+    const host = canvas.parentElement;
+    host.addEventListener('pointermove', e => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      if (mouse.sx < -999) { mouse.sx = mouse.x; mouse.sy = mouse.y; }
+    });
+    host.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+    host.addEventListener('pointerdown', e => {
+      const r = canvas.getBoundingClientRect();
+      ripples.push({ x: e.clientX - r.left, y: e.clientY - r.top, t: 0 });
+    });
+    setInterval(() => { if (ripples.length < 3 && !document.hidden) ripples.push({ x: W * (.55 + Math.random() * .4), y: H * (.15 + Math.random() * .7), t: 0, soft: true }); }, 3600);
+
+    let visible = true;
+    new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(canvas);
+
+    let last = performance.now();
+    (function frame(now) {
+      requestAnimationFrame(frame);
+      if (!visible) return;
+      const dt = Math.min(.05, (now - last) / 1000); last = now;
+      const t = reducedMotion ? 0 : now / 1000;
+      mouse.sx += (mouse.x - mouse.sx) * .15; mouse.sy += (mouse.y - mouse.sy) * .15;
+      if (mouse.x < -999) { mouse.sx = mouse.sy = -9999; }
+      for (let i = ripples.length - 1; i >= 0; i--) { ripples[i].t += dt; if (ripples[i].t > 2.6) ripples.splice(i, 1); }
+
+      ctx.clearRect(0, 0, W, H);
+      const dots = new Path2D();
+      const maxR = GAP * .46;
+      const textSide = W > 760;
+      for (let j = 0; j < rows; j++) {
+        const y = j * ROW;
+        const edge = Math.min(1, (1 - y / H) * 3) * Math.min(1, Math.max(0, (y - 70) / 110));
+        if (edge <= 0) continue;
+        for (let i = 0; i < cols; i++) {
+          const x = i * GAP + (j % 2 ? GAP / 2 : 0);
+          const nx = x / W, ny = y / H;
+          let v = .5 + .5 * Math.sin(nx * 5.2 + ny * 2.4 - t * .6) * Math.cos(ny * 4.1 - nx * 1.3 + t * .35);
+          v = v * v;
+          // keep the left (text) side calmer on wide screens
+          v *= textSide ? Math.min(1, Math.max(.12, (nx - .25) * 1.6)) : .45;
+          v *= edge;
+          const dx = x - mouse.sx, dy = y - mouse.sy;
+          v += Math.exp(-(dx * dx + dy * dy) / 9000) * .9;
+          for (const r of ripples) {
+            const d = Math.hypot(x - r.x, y - r.y);
+            v += Math.exp(-((d - r.t * 420) ** 2) / 1400) * (1 - r.t / 2.6) * (r.soft ? .45 : 1);
+          }
+          if (v < .03) continue;
+          const rad = Math.min(maxR, maxR * v);
+          dots.moveTo(x + rad, y); dots.arc(x, y, rad, 0, 6.2832);
+        }
+      }
+      ctx.fillStyle = color; ctx.fill(dots);
+    })(last);
+  })();
+</script>
+</body>
+</html>

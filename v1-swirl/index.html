@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomas Alvarez</title>
+<meta name="description" content="Tomas Alvarez, Game Designer based in Vancouver, Canada.">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+  :root { --font: 'Manrope', system-ui, sans-serif; }
+
+  .hero { padding: 76px 12px 0; }
+  .hero-panel {
+    position: relative; overflow: hidden;
+    height: calc(100svh - 88px); min-height: 520px; max-height: 920px;
+    border-radius: 32px; background: var(--blue-2);
+    isolation: isolate;
+  }
+  #swirl { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+  /* fine halftone texture, a nod to the reference image */
+  .hero-panel::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,.22) 1px, transparent 1.3px);
+    background-size: 6px 6px; mix-blend-mode: soft-light;
+  }
+  .hero-panel::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(180deg, transparent 35%, rgba(4,10,38,.6) 100%);
+  }
+  .hero-content {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: clamp(24px, 5vw, 64px);
+    display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap;
+    color: #fff;
+  }
+  .hero h1 {
+    margin: 0; font-weight: 800; letter-spacing: -.055em; line-height: .9;
+    font-size: clamp(56px, 11vw, 168px);
+  }
+  .hero h1 span { display: block; }
+  .hero .tag {
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    padding: 8px 14px 8px 10px; border-radius: 999px;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    font-size: 14px; font-weight: 600;
+  }
+  .hero .tag i { width: 8px; height: 8px; border-radius: 50%; background: #9CFFB4; box-shadow: 0 0 0 4px rgba(156,255,180,.25); }
+  .hero-side { max-width: 340px; font-size: 16px; line-height: 1.55; color: rgba(255,255,255,.88); }
+  .hero-side a.cta {
+    margin-top: 18px; display: inline-flex; align-items: center; gap: 10px;
+    background: #fff; color: var(--blue-1); font-weight: 700; font-size: 15px;
+    padding: 13px 20px; border-radius: 999px; transition: transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .hero-side a.cta:hover { transform: translateY(-3px); }
+  /* Nav sits over the panel, keep it legible */
+  .nav:not(.scrolled) .nav-links a { color: var(--text); }
+
+  /* Intro animation */
+  .hero h1 span, .hero .tag, .hero-side { opacity: 0; transform: translateY(40px); animation: rise 1.1s cubic-bezier(.2,.8,.2,1) forwards; }
+  .hero h1 span:nth-child(2) { animation-delay: .1s; }
+  .hero-side { animation-delay: .25s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero h1 span, .hero .tag, .hero-side { animation: none; opacity: 1; transform: none; } }
+</style>
+</head>
+<body id="top">
+<section class="hero">
+  <div class="hero-panel">
+    <canvas id="swirl"></canvas>
+    <div class="hero-content">
+      <div>
+        <div class="tag"><i></i>Game Designer · Vancouver</div>
+        <h1><span>Tomas</span><span>Alvarez</span></h1>
+      </div>
+      <div class="hero-side">
+        Designing games that are fun, cohesive and memorable, across design, programming, art and production.
+        <br><a class="cta" href="#work">See my work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+<main id="main"></main>
+
+<script src="../shared/base.js"></script>
+<script>
+  renderStandard(document.getElementById('main'));
+  renderFooter();
+  renderVersionPill('v1-swirl');
+  initReveal();
+
+  // ---------- Liquid swirl (WebGL fragment shader) ----------
+  (function () {
+    const canvas = document.getElementById('swirl');
+    const gl = canvas.getContext('webgl', { antialias: false, premultipliedAlpha: false });
+    if (!gl) return;
+
+    const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
+    const fs = `
+      precision highp float;
+      uniform vec2 uRes; uniform float uTime; uniform vec2 uMouse; uniform float uDark;
+      vec3 C1 = vec3(0.027,0.169,0.949);
+      vec3 C2 = vec3(0.133,0.337,0.949);
+      vec3 C3 = vec3(0.361,0.510,0.949);
+      vec3 C4 = vec3(0.533,0.635,0.949);
+      vec3 C5 = vec3(0.761,0.808,0.949);
+
+      float hash(vec2 p){ p = fract(p*vec2(.1031,.103)); p += dot(p, p.yx+33.33); return fract((p.x+p.y)*p.x); }
+      float noise(vec2 p){
+        vec2 i = floor(p), f = fract(p);
+        vec2 u = f*f*(3.-2.*f);
+        return mix(mix(hash(i), hash(i+vec2(1,0)), u.x), mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), u.x), u.y);
+      }
+      float fbm(vec2 p){
+        float v = 0., a = .5;
+        mat2 R = mat2(.8,.6,-.6,.8);
+        for (int i = 0; i < 4; i++){ v += a*noise(p); p = R*p*2.02; a *= .5; }
+        return v;
+      }
+      vec3 palette(float x){
+        x = clamp(x, 0., 1.);
+        if (x < .25) return mix(C1, C2, x/.25);
+        if (x < .5)  return mix(C2, C3, (x-.25)/.25);
+        if (x < .75) return mix(C3, C4, (x-.5)/.25);
+        return mix(C4, C5, (x-.75)/.25);
+      }
+      void main(){
+        vec2 uv = (gl_FragCoord.xy - .5*uRes) / uRes.y;
+        float t = uTime;
+        // whirlpool centre drifts gently toward the cursor
+        vec2 c = uv - vec2(.25, .1) - (uMouse - .5) * .25;
+        float r = length(c);
+        float twist = 3.2 * exp(-r * 1.6) + t * .05;
+        float s = sin(twist), co = cos(twist);
+        vec2 p = mat2(co, -s, s, co) * c;
+
+        vec2 q = vec2(fbm(p*.9 + t*.04), fbm(p*.9 + vec2(5.2,1.3) - t*.03));
+        vec2 w = vec2(fbm(p*.9 + 2.5*q + vec2(1.7,9.2) + t*.06), fbm(p*.9 + 2.5*q + vec2(8.3,2.8)));
+        float f = fbm(p*.9 + 2.2*w);
+
+        // marbled bands
+        float bands = sin(f*13. + r*4. - t*.35);
+        float stripe = smoothstep(.62, .82, bands);       // soft white ribbons
+        float deep   = smoothstep(-.4, -.95, bands);      // darker channels
+
+        vec3 col = palette(f*1.15 - .05);
+        col = mix(col, C1, deep*.55);
+        col = mix(col, vec3(1.), stripe*.75);
+        // dark theme: pull everything a notch deeper
+        col = mix(col, col*vec3(.55,.6,.85), uDark*.35);
+        gl_FragColor = vec4(col, 1.);
+      }`;
+
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog); gl.useProgram(prog);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = n => gl.getUniformLocation(prog, n);
+    const uRes = U('uRes'), uTime = U('uTime'), uMouse = U('uMouse'), uDark = U('uDark');
+
+    // render at reduced resolution: it's soft anyway and much cheaper
+    const SCALE = 0.75;
+    function resize() {
+      const r = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, r.width * SCALE); canvas.height = Math.max(1, r.height * SCALE);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    addEventListener('resize', resize); resize();
+
+    const mouse = { x: .5, y: .5, tx: .5, ty: .5 };
+    addEventListener('pointermove', e => { mouse.tx = e.clientX / innerWidth; mouse.ty = 1 - e.clientY / innerHeight; });
+    let dark = isDarkTheme() ? 1 : 0, darkT = dark;
+    addEventListener('themechange', e => darkT = e.detail.dark ? 1 : 0);
+
+    let visible = true;
+    new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(canvas);
+    const start = performance.now();
+    (function frame(now) {
+      requestAnimationFrame(frame);
+      if (!visible) return;
+      mouse.x += (mouse.tx - mouse.x) * .04; mouse.y += (mouse.ty - mouse.y) * .04;
+      dark += (darkT - dark) * .08;
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, reducedMotion ? 8 : (now - start) / 1000);
+      gl.uniform2f(uMouse, mouse.x, mouse.y);
+      gl.uniform1f(uDark, dark);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    })(start);
+  })();
+</script>
+</body>
+</html>

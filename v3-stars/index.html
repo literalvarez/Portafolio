@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomas Alvarez</title>
+<meta name="description" content="Tomas Alvarez, Game Designer based in Vancouver, Canada.">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+  :root { --font: 'Plus Jakarta Sans', system-ui, sans-serif; }
+
+  #stars { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+  main, .hero, .foot { position: relative; z-index: 1; }
+  .nav { z-index: 50; }
+
+  /* soft blue glow behind the hero */
+  body::before {
+    content: ""; position: absolute; left: 50%; top: -20vh; width: 140vw; height: 120vh; transform: translateX(-50%);
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--blue-3) 26%, transparent), transparent);
+    pointer-events: none; z-index: 0;
+  }
+
+  .hero {
+    min-height: 100svh; display: grid; place-items: center; text-align: center;
+    padding: 120px var(--gutter) 90px;
+  }
+  .hero .badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--muted);
+    box-shadow: var(--shadow);
+  }
+  .hero .badge svg { width: 16px; height: 16px; color: var(--accent); }
+  .hero h1 {
+    margin: 26px 0 0; font-weight: 800; letter-spacing: -.055em; line-height: .95;
+    font-size: clamp(56px, 11vw, 160px);
+  }
+  .hero h1 .grad {
+    background: linear-gradient(100deg, var(--blue-1), var(--blue-3) 50%, var(--blue-1));
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shimmer 6s ease-in-out infinite;
+  }
+  :root[data-theme="dark"] .hero h1 .grad { background-image: linear-gradient(100deg, var(--blue-3), var(--blue-5) 50%, var(--blue-3)); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero h1 .grad { background-image: linear-gradient(100deg, var(--blue-3), var(--blue-5) 50%, var(--blue-3)); } }
+  @keyframes shimmer { 50% { background-position: 100% 0; } }
+  .hero p { margin: 24px auto 0; max-width: 520px; color: var(--muted); font-size: clamp(17px, 1.8vw, 20px); }
+  .hero .actions { margin-top: 34px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px;
+    padding: 14px 22px; border-radius: 999px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+  }
+  .btn.primary { background: var(--accent); color: var(--on-accent); }
+  .btn.ghost { background: var(--surface); border: 1px solid var(--line); }
+  .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .scroll-cue { position: absolute; bottom: 86px; left: 50%; transform: translateX(-50%); width: 24px; height: 38px; border: 2px solid var(--line); border-radius: 14px; }
+  .scroll-cue::after { content: ""; position: absolute; left: 50%; top: 7px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--accent); animation: cue 1.8s infinite; }
+  @keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+
+  /* Intro pop */
+  .pop { opacity: 0; transform: translateY(24px) scale(.96); animation: pop .9s cubic-bezier(.2,.9,.25,1.2) forwards; }
+  .pop.d1 { animation-delay: .1s; } .pop.d2 { animation-delay: .22s; } .pop.d3 { animation-delay: .34s; }
+  @keyframes pop { to { opacity: 1; transform: none; } }
+
+  /* Cards: give the stacked cards a little "lift" tilt on hover */
+  .project-media { transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .6s; }
+  .project:hover .project-media { transform: translateY(-6px) rotate(-.4deg); }
+  .skill { position: relative; }
+  @media (prefers-reduced-motion: reduce) { .pop { animation: none; opacity: 1; transform: none; } .hero h1 .grad { animation: none; } }
+</style>
+</head>
+<body id="top">
+<canvas id="stars" aria-hidden="true"></canvas>
+<section class="hero">
+  <div>
+    <span class="badge pop"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6L2.5 9.3l6.6-.8z"/></svg>Game Designer · Vancouver, Canada</span>
+    <h1 class="pop d1">Tomas<br><span class="grad">Alvarez</span></h1>
+    <p class="pop d2">Designing games that are fun, cohesive and memorable, across design, programming, art and production.</p>
+    <div class="actions pop d3">
+      <a class="btn primary" href="#work">See my work</a>
+      <a class="btn ghost" href="#about">About me</a>
+    </div>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+<main id="main"></main>
+
+<script src="../shared/base.js"></script>
+<script>
+  renderStandard(document.getElementById('main'));
+  renderFooter();
+  renderVersionPill('v3-stars');
+  initReveal();
+
+  // ---------- Floating stars ----------
+  (function () {
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let W, H, dpr, fill, stroke, soft;
+
+    // unit 5-point star; drawn with round joins it gets the chunky sticker look from the reference
+    const star = new Path2D();
+    for (let i = 0; i < 10; i++) {
+      const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? .48 : 1;
+      i ? star.lineTo(Math.cos(a) * r, Math.sin(a) * r) : star.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+    }
+    star.closePath();
+
+    function readColors() {
+      const cs = getComputedStyle(document.documentElement);
+      fill = cs.getPropertyValue('--surface').trim();
+      stroke = cs.getPropertyValue('--accent').trim();
+      soft = cs.getPropertyValue('--blue-4').trim();
+    }
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+    }
+    readColors(); resize();
+    addEventListener('resize', resize);
+    addEventListener('themechange', () => requestAnimationFrame(readColors));
+
+    const rand = (a, b) => a + Math.random() * (b - a);
+    const COUNT = innerWidth < 700 ? 10 : 18;
+    const stars = [];
+    function make(x, y, burst) {
+      const depth = rand(.3, 1);              // 1 = close, big, moves more with scroll
+      return {
+        x: x ?? rand(0, W), y: y ?? rand(0, H * 1.2),
+        vx: burst ? rand(-260, 260) : rand(-6, 6), vy: burst ? rand(-320, -60) : rand(-14, -5),
+        size: burst ? rand(5, 10) : 6 + depth * rand(8, 20),
+        rot: rand(0, 6.28), vr: rand(-.4, .4), depth,
+        tw: rand(0, 6.28), outline: Math.random() < .7, life: burst ? 1.6 : Infinity
+      };
+    }
+    for (let i = 0; i < COUNT; i++) stars.push(make());
+
+    const mouse = { x: -9999, y: -9999 };
+    addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+    // click on empty space -> little burst of stars
+    addEventListener('pointerdown', e => {
+      if (e.target.closest('a,button,.skill')) return;
+      for (let i = 0; i < 7; i++) stars.push(make(e.clientX, e.clientY + scrollY * 0, true));
+    });
+
+    let lastScroll = scrollY, last = performance.now();
+    (function frame(now) {
+      requestAnimationFrame(frame);
+      const dt = Math.min(.05, (now - last) / 1000); last = now;
+      const ds = scrollY - lastScroll; lastScroll = scrollY;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineJoin = 'round';
+
+      for (let i = stars.length - 1; i >= 0; i--) {
+        const s = stars[i];
+        if (!reducedMotion) {
+          // cursor pushes stars away
+          const dx = s.x - mouse.x, dy = s.y - mouse.y, d2 = dx * dx + dy * dy;
+          if (d2 < 22000) { const f = (1 - d2 / 22000) * 900 * dt / Math.sqrt(d2 + 1); s.vx += dx * f; s.vy += dy * f; s.vr += (dx > 0 ? 1 : -1) * 2 * dt; }
+          if (s.life === Infinity) {
+            // ease back toward gentle drift
+            s.vx += (Math.sign(s.vx || 1) * 4 - s.vx) * .9 * dt;
+            s.vy += (-9 * s.depth - s.vy) * .9 * dt;
+            s.vr += (Math.sign(s.vr || 1) * .25 - s.vr) * .6 * dt;
+          } else {
+            s.vy += 520 * dt; s.life -= dt;            // burst stars fall & fade
+            if (s.life <= 0) { stars.splice(i, 1); continue; }
+          }
+          s.x += s.vx * dt; s.y += s.vy * dt - ds * s.depth * .35; s.rot += s.vr * dt; s.tw += dt * 2;
+        }
+        // wrap around
+        const m = s.size * 2;
+        if (s.life === Infinity) {
+          if (s.y < -m) { s.y = H + m; s.x = rand(0, W); }
+          if (s.y > H + m) { s.y = -m; s.x = rand(0, W); }
+          if (s.x < -m) s.x = W + m; if (s.x > W + m) s.x = -m;
+        }
+        const tw = 1 + Math.sin(s.tw) * .08;
+        const alpha = s.life === Infinity ? .35 + s.depth * .65 : Math.min(1, s.life);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(s.x, s.y); ctx.rotate(s.rot); ctx.scale(s.size * tw, s.size * tw);
+        if (s.outline) {
+          ctx.fillStyle = fill; ctx.fill(star);
+          ctx.lineWidth = 3.2 / (s.size * tw); ctx.strokeStyle = stroke; ctx.stroke(star);
+        } else {
+          ctx.fillStyle = soft; ctx.fill(star);
+        }
+        ctx.restore();
+      }
+    })(last);
+  })();
+</script>
+</body>
+</html>

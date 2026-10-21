@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" data-home="index.html" data-hobbies="hobbies.html" data-dock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAPO · Tomas Alvarez</title>
+<meta name="description" content="SAPO: a 3D top-down bullet hell boss fight. Combat design, programming and audio by Tomas Alvarez.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="project.css">
+<style>
+  /* SAPO-specific tweaks */
+  .p-hero .bg img { object-position: 50% 30%; }
+  .p-logo { width: min(400px, 74vw); }
+  .stage.diagram { aspect-ratio: 1400 / 984; background: #1a0b33; }
+  .stage.diagram img { object-fit: contain; }
+  .mechanics { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 30px; }
+  .mechanic { border-top: 2px solid var(--accent); padding-top: 16px; }
+  .mechanic h3 { font-size: 20px; }
+  .mechanic p { font-size: 16px !important; margin: 0 0 10px !important; }
+  @media (max-width: 760px) { .mechanics { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body id="top">
+
+<header class="p-hero">
+  <div class="bg"><img src="../assets/sapo/hero.jpg" alt="The Yakuza Crane boss from SAPO"></div>
+  <div class="wrap">
+    <a class="back" href="index.html#work"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All projects</a>
+    <div class="intro-anim">
+      <h1>SAPO</h1>
+      <img class="p-logo" src="../assets/sapo/logo.png" alt="SAPO logo">
+      <p class="p-genre">Top Down 3D Bullet Hell Boss Fight</p>
+      <div class="p-actions">
+        <a class="btn" href="https://literalvarez.itch.io/sapo?secret=VHS6cYFrXtsucaJ2temsWuVnwz0" target="_blank" rel="noopener">Play on itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      </div>
+    </div>
+    <dl class="facts reveal">
+      <div><dt>Role</dt><dd>Combat Designer &amp; Programmer</dd></div>
+      <div><dt>Team</dt><dd>4 people</dd></div>
+      <div><dt>Duration</dt><dd>4 months</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="wrap p-body">
+  <nav class="toc" aria-label="On this page">
+    <span>On this page</span>
+    <a href="#overview">Overview</a>
+    <a href="#my-work">My work</a>
+    <a href="#combat">Combat design</a>
+    <a href="#patterns">Boss patterns</a>
+    <a href="#audio">Game audio</a>
+  </nav>
+
+  <main>
+    <section class="chapter" id="overview">
+      <span class="eyebrow reveal">Overview</span>
+      <h2 class="reveal">Fight close, stack poison</h2>
+      <p class="lead reveal">SAPO is a 3D top down, bullet hell, boss-fight game where you play as Jaime the frog and defeat the Yakuza Crane by dodging and attacking with your poisonous tongue.</p>
+      <p class="reveal">Quickly maneuver and play aggressively to stack poison, while avoiding the boss' attacks.</p>
+    </section>
+
+    <section class="chapter" id="my-work">
+      <span class="eyebrow reveal">My work</span>
+      <h2 class="reveal">Design &amp; programming</h2>
+      <p class="reveal">As designer and programmer, my responsibilities included:</p>
+      <ul class="duties reveal">
+        <li>Combat design</li>
+        <li>Bullet hell design</li>
+        <li>Programming different gameplay systems</li>
+        <li>UI implementation</li>
+        <li>Balancing and gathering feedback</li>
+        <li>Creating VFX</li>
+        <li>Composing, mixing and mastering the soundtrack</li>
+        <li>Implementing game sound using FMOD</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="combat">
+      <span class="eyebrow reveal">Combat design</span>
+      <h2 class="reveal">Rewarding aggression</h2>
+      <p class="reveal">SAPO is a bullet hell built around aggressive play. Players are rewarded for staying close to the boss, supported by mechanics such as poison stacking and boomerang-style projectiles.</p>
+      <p class="reveal">This design intentionally subverts the common bullet hell strategy of staying far away from the boss to maximize safety.</p>
+      <div class="mechanics">
+        <div class="mechanic reveal">
+          <h3>Boomerang attack</h3>
+          <p>The player attacks with a boomerang-style projectile that hits enemies on both its outgoing and returning paths, rewarding good positioning around the boss.</p>
+        </div>
+        <div class="mechanic reveal" data-delay="1">
+          <h3>Poison stacks</h3>
+          <p>Attacks also apply poison stacks, encouraging players to stay aggressive and maintain constant pressure on the boss.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="patterns">
+      <span class="eyebrow reveal">Boss attack patterns</span>
+      <h2 class="reveal">Controlling space</h2>
+      <p class="reveal">The boss uses bullet patterns designed to control space and challenge close-range play.</p>
+      <p class="reveal">Radial spreads, rotating patterns, and directional barrages force players to dodge while maintaining aggressive positioning.</p>
+      <div class="process reveal">
+        <div class="stage diagram" id="stage">
+          <img alt="">
+          <span class="count"></span>
+          <button class="nav-btn prev" aria-label="Previous image"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="nav-btn next" aria-label="Next image"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+        <div class="bar"><i></i></div>
+        <div class="caption"><b></b><span></span></div>
+      </div>
+    </section>
+
+    <section class="chapter" id="audio">
+      <span class="eyebrow reveal">Game audio</span>
+      <h2 class="reveal">Music &amp; sound</h2>
+      <div class="two">
+        <div class="reveal">
+          <h3>Music composition</h3>
+          <p>Collaborated with the team to define the game's musical identity, contributing to the creative direction and composing original tracks for the Main Menu and Battle sequences, the two core pillars of the game's audio experience.</p>
+        </div>
+        <div class="reveal" data-delay="1">
+          <h3>Sound implementation</h3>
+          <p>Sourced and curated sound effects from the VFS SFX library, editing and refining each asset to fit the game's tone. Integrated all audio into the project using FMOD.</p>
+        </div>
+      </div>
+      <div class="two" style="margin-top:28px">
+        <div class="reveal"><button class="yt" data-id="eI7mKubUIAI" aria-label="Play SAPO Menu theme"><span class="cap">Menu theme</span></button></div>
+        <div class="reveal" data-delay="1"><button class="yt" data-id="Acw1nw_gjHw" aria-label="Play SAPO Battle theme"><span class="cap">Battle theme</span></button></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<section class="play-band">
+  <div class="wrap">
+    <div><span class="eyebrow">Try it yourself</span><h2>Play SAPO</h2></div>
+    <a class="btn" href="https://literalvarez.itch.io/sapo?secret=VHS6cYFrXtsucaJ2temsWuVnwz0" target="_blank" rel="noopener">Play on itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+  </div>
+</section>
+
+<div class="wrap next-proj">
+  <a class="back" style="color:var(--muted);margin:0" href="atomic-overdrive.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Atomic Overdrive</a>
+  <a class="next" href="the-last-beat.html"><img src="../assets/lastbeat.png" alt=""><span><small>Next project</small><strong>The Last Beat</strong></span></a>
+</div>
+
+<div class="lightbox" id="lightbox"><img alt=""></div>
+
+<script src="../shared/base.js"></script>
+<script src="project.js"></script>
+<script>
+  initProjectPage({
+    gallery: [
+      { t: 'Circular attack: 4 lanes', c: 'Four curved lanes of feathers spiral out from the boss, leaving gaps the player has to move through.', src: '../assets/sapo/pattern-1.jpg' },
+      { t: 'Circular attack: negative area', c: 'A dense rotating spread fills the arena, so the player has to find the open space.', src: '../assets/sapo/pattern-2.jpg' },
+      { t: 'Waves of circles', c: 'Rings of feathers travel across the arena in waves, forcing directional dodges.', src: '../assets/sapo/pattern-3.jpg' }
+    ]
+  });
+</script>
+</body>
+</html>
