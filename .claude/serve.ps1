@@ -1,7 +1,7 @@
 param([int]$Port = 5173)
 if ($env:PORT) { $Port = [int]$env:PORT }   # follow the port the preview app assigns
 $root = Split-Path -Parent $PSScriptRoot
-$types = @{ '.html'='text/html; charset=utf-8'; '.css'='text/css'; '.js'='text/javascript'; '.png'='image/png'; '.jpg'='image/jpeg'; '.svg'='image/svg+xml'; '.json'='application/json'; '.mp3'='audio/mpeg'; '.webp'='image/webp'; '.gif'='image/gif' }
+$types = @{ '.html'='text/html; charset=utf-8'; '.css'='text/css'; '.js'='text/javascript'; '.png'='image/png'; '.jpg'='image/jpeg'; '.svg'='image/svg+xml'; '.json'='application/json'; '.mp3'='audio/mpeg'; '.webp'='image/webp'; '.gif'='image/gif'; '.ttf'='font/ttf'; '.otf'='font/otf'; '.woff'='font/woff'; '.woff2'='font/woff2'; '.webmanifest'='application/manifest+json' }
 $l = New-Object System.Net.HttpListener
 $l.Prefixes.Add("http://localhost:$Port/")
 $l.Start()

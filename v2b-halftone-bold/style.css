@@ -1,7 +1,10 @@
+/* Conthrax (titles): self-hosted, SemiBold is the only weight we have, so it is used for every title weight */
+@font-face { font-family: 'Conthrax'; src: url('../assets/fonts/conthrax.otf') format('opentype'); font-weight: 100 900; font-display: swap; }
+
   /* ---------- Bolder palette: black, white and a wider range of blues ---------- */
   :root {
-    --font: 'Archivo', system-ui, sans-serif;
-    --display: 'Archivo', system-ui, sans-serif;
+    --font: 'Montserrat', system-ui, sans-serif;
+    --display: 'Conthrax', system-ui, sans-serif;
     --hl: var(--blue-1);              /* highlight dots / hard shadows */
     --band: var(--blue-2);
     --band-deep: var(--blue-1);
