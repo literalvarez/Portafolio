@@ -66,7 +66,7 @@
     </figure>
     <div class="about-body">
       <h2 class="about-title reveal">About</h2>
-      <p class="reveal" data-delay="1">Game Designer &amp; Developer from Medellín, Colombia, now based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive and memorable.</p>
+      <p class="reveal" data-delay="1">Hi! I'm Tomas, a Game Designer &amp; Developer from Medellín, Colombia, now based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive and memorable.</p>
       <p class="reveal" data-delay="1">Since 2018 I've been building skills across Design, Programming, Production, Art and Audio, because understanding how a game comes together as a whole makes me a better designer for every part of it.</p>
       <p class="reach-line reveal" data-delay="2">Feel free to reach out! I'd love to talk about games, music, or any project you have in mind.</p>
       <div class="reach-actions reveal" data-delay="2">
@@ -116,14 +116,19 @@
       'Visuals': svg('<circle cx="12" cy="12" r="3"/><path class="ring" d="M12 4.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15z"/>')
     };
     const icon = type => `<span class="pg-icon" data-type="${type}">${icons[type] || icons.Music}</span>`;
-    track.innerHTML = SITE.playground.map((p, i) => `
-      <a class="pg-card" href="hobbies.html#${p.id}" style="--i:${i}">
+    // home carousel: one music card per game (items marked home: false only appear on the Hobbies page)
+    // hobbies unrelated to the showcased projects come first, then the music from those games
+    const projectTitles = SITE.projects.map(p => p.title);
+    const related = p => projectTitles.includes(p.from);
+    const cards = SITE.playground.filter(p => p.home !== false);
+    track.innerHTML = [...cards.filter(p => !related(p)), ...cards.filter(related)].map((p, i) => `
+      <a class="pg-card" href="hobbies.html#${p.id}" style="--i:${i}" draggable="false">
         <img src="${/^https?:/.test(p.img) ? p.img : `../assets/${p.img}`}" alt="" loading="lazy" draggable="false">
         <span class="pg-tag">${p.type}</span>
         ${icon(p.type)}
         <span class="pg-text"><b>${p.title}</b><small>${p.from} · ${p.use}</small></span>
       </a>`).join('') + `
-      <a class="pg-card pg-more" href="hobbies.html">
+      <a class="pg-card pg-more" href="hobbies.html" draggable="false">
         <span class="pg-text"><b>See everything</b><small>Open hobbies</small></span>
         <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>`;
@@ -145,6 +150,8 @@
       track.scrollLeft = startLeft - dx;
     });
     addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); });
+    // stop the browser's own "drag this link" behaviour so dragging always scrolls the row
+    track.addEventListener('dragstart', e => e.preventDefault());
     // a drag shouldn't count as a click on the card underneath
     track.addEventListener('click', e => { if (moved > 6) { e.preventDefault(); moved = 0; } }, true);
 
@@ -225,7 +232,22 @@
   (function () {
     const canvas = document.getElementById('dots');
     const ctx = canvas.getContext('2d');
-    const GAP = 16, ROW = GAP * Math.sqrt(3) / 2;   // version 2 dots, on a true hex grid
+    // Live settings (the Halftone lab tool edits this object; these are the site defaults)
+    const S = window.HALFTONE = Object.assign({
+      gap: 16,          // dot spacing in px
+      size: .46,        // biggest dot radius, as a fraction of the spacing
+      freq: 1,          // wave pattern frequency
+      speed: 1,         // wave animation speed
+      contrast: 2,      // higher = more empty space between the bright areas
+      calm: 1,          // how much quieter the dots are behind the text (0 = not at all)
+      lens: 95,         // cursor lens radius in px
+      lensStrength: .9, // how much the cursor grows the dots
+      ripples: true,    // click ripples + ambient ripples
+      rippleSpeed: 420, // ripple spread in px per second
+      grid: 'hex',      // 'hex' or 'square'
+      color: ''         // '' = theme accent colour, or any CSS colour
+    }, window.HALFTONE || {});
+    let GAP = S.gap, ROW, grid;
     let W, H, dpr, cols, rows, color;
     const mouse = { x: -9999, y: -9999, sx: -9999, sy: -9999 };
     const ripples = [];
@@ -240,6 +262,8 @@
       W = r.width; H = r.height;
       canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      GAP = S.gap; grid = S.grid;
+      ROW = grid === 'hex' ? GAP * Math.sqrt(3) / 2 : GAP;
       cols = Math.ceil(W / GAP) + 1; rows = Math.ceil(H / ROW) + 1;
     }
     readColor(); resize();
@@ -254,10 +278,11 @@
     });
     host.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
     host.addEventListener('pointerdown', e => {
+      if (!S.ripples) return;
       const r = canvas.getBoundingClientRect();
       ripples.push({ x: e.clientX - r.left, y: e.clientY - r.top, t: 0 });
     });
-    setInterval(() => { if (ripples.length < 3 && !document.hidden) ripples.push({ x: W * (.55 + Math.random() * .4), y: H * (.15 + Math.random() * .7), t: 0, soft: true }); }, 3600);
+    setInterval(() => { if (S.ripples && ripples.length < 3 && !document.hidden) ripples.push({ x: W * (.55 + Math.random() * .4), y: H * (.15 + Math.random() * .7), t: 0, soft: true }); }, 3600);
 
     let visible = true;
     new IntersectionObserver(([e]) => visible = e.isIntersecting).observe(canvas);
@@ -267,42 +292,51 @@
       requestAnimationFrame(frame);
       if (!visible) return;
       const dt = Math.min(.05, (now - last) / 1000); last = now;
-      const t = reducedMotion ? 0 : now / 1000;
+      if (S.gap !== GAP || S.grid !== grid) resize();   // the lab changed the grid
+      const t = reducedMotion ? 0 : now / 1000 * S.speed;
       mouse.sx += (mouse.x - mouse.sx) * .15; mouse.sy += (mouse.y - mouse.sy) * .15;
       if (mouse.x < -999) { mouse.sx = mouse.sy = -9999; }
-      for (let i = ripples.length - 1; i >= 0; i--) { ripples[i].t += dt; if (ripples[i].t > 2.6) ripples.splice(i, 1); }
+      const rLife = 2.6 * 420 / S.rippleSpeed;   // faster ripples fade sooner (2.6s at the default speed)
+      for (let i = ripples.length - 1; i >= 0; i--) { ripples[i].t += dt; if (ripples[i].t > rLife) ripples.splice(i, 1); }
 
       ctx.clearRect(0, 0, W, H);
       const dots = new Path2D();
-      const maxR = GAP * .46;
+      const maxR = GAP * S.size;
       const textSide = W > 760;
+      const f = S.freq, lens2 = S.lens * S.lens;
       for (let j = 0; j < rows; j++) {
         const y = j * ROW;
         const edge = Math.min(1, (1 - y / H) * 3) * Math.min(1, Math.max(0, (y - 70) / 110));
         if (edge <= 0) continue;
         for (let i = 0; i < cols; i++) {
-          const x = i * GAP + (j % 2 ? GAP / 2 : 0);
+          const x = i * GAP + (grid === 'hex' && j % 2 ? GAP / 2 : 0);
           const nx = x / W, ny = y / H;
-          let v = .5 + .5 * Math.sin(nx * 5.2 + ny * 2.4 - t * .6) * Math.cos(ny * 4.1 - nx * 1.3 + t * .35);
-          v = v * v;
+          let v = .5 + .5 * Math.sin((nx * 5.2 + ny * 2.4) * f - t * .6) * Math.cos((ny * 4.1 - nx * 1.3) * f + t * .35);
+          v = Math.pow(v, S.contrast);
           // keep the left (text) side calmer on wide screens
-          v *= textSide ? Math.min(1, Math.max(.12, (nx - .25) * 1.6)) : .45;
+          const calm = textSide ? Math.min(1, Math.max(.12, (nx - .25) * 1.6)) : .45;
+          v *= 1 - S.calm * (1 - calm);
           v *= edge;
-          const dx = x - mouse.sx, dy = y - mouse.sy;
-          v += Math.exp(-(dx * dx + dy * dy) / 9000) * .9;
+          if (S.lensStrength && S.lens) {
+            const dx = x - mouse.sx, dy = y - mouse.sy;
+            v += Math.exp(-(dx * dx + dy * dy) / lens2) * S.lensStrength;
+          }
           for (const r of ripples) {
             const d = Math.hypot(x - r.x, y - r.y);
-            v += Math.exp(-((d - r.t * 420) ** 2) / 1400) * (1 - r.t / 2.6) * (r.soft ? .45 : 1);
+            v += Math.exp(-((d - r.t * S.rippleSpeed) ** 2) / 1400) * Math.max(0, 1 - r.t / rLife) * (r.soft ? .45 : 1);
           }
           if (v < .03) continue;
           const rad = Math.min(maxR, maxR * v);
           dots.moveTo(x + rad, y); dots.arc(x, y, rad, 0, 6.2832);
         }
       }
-      ctx.fillStyle = color; ctx.fill(dots);
+      ctx.fillStyle = S.color || color; ctx.fill(dots);
     })(last);
   })();
 </script>
-<script src="font-lab.js"></script><!-- font prototyping panel: remove when done -->
+<!-- prototyping tools (Tools menu bottom-left: Font lab + Halftone lab): remove these three lines when done -->
+<script src="tools.js"></script>
+<script src="font-lab.js"></script>
+<script src="halftone-lab.js"></script>
 </body>
 </html>

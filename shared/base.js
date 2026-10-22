@@ -34,13 +34,13 @@
     ],
     // Hobbies / passion projects. Media, in order of preference: a YouTube id (`yt`), a SoundCloud track/playlist (`sc`), an itch.io `link`, or an MP3 (`audio`, in /assets).
     playground: [
-      { id: 'away', type: 'Music', title: 'Away', from: 'Atomic Overdrive', use: 'Title screen theme', img: 'atomic.jpg', audio: '', yt: 'S2U2jHfkpVc',
+      { id: 'away', home: false, type: 'Music', title: 'Away', from: 'Atomic Overdrive', use: 'Title screen theme', img: 'atomic.jpg', audio: '', yt: 'S2U2jHfkpVc',
         text: 'One of two songs I composed and produced for Atomic Overdrive, written for the title screen.' },
       { id: 'runner', type: 'Music', title: 'Runner', from: 'Atomic Overdrive', use: 'Lobby theme', img: 'atomic.jpg', audio: '', yt: 'FarF1LeNlQE',
         text: 'The second Atomic Overdrive track, playing in the lobby while racers get ready.' },
       { id: 'sapo-menu', type: 'Music', title: 'Menu', from: 'SAPO', use: 'Menu theme', img: 'sapo.png', audio: '', yt: 'eI7mKubUIAI',
         text: 'Part of the musical identity I helped define for SAPO, one of its two core tracks.' },
-      { id: 'sapo-battle', type: 'Music', title: 'Battle', from: 'SAPO', use: 'Boss fight theme', img: 'sapo.png', audio: '', yt: 'Acw1nw_gjHw',
+      { id: 'sapo-battle', home: false, type: 'Music', title: 'Battle', from: 'SAPO', use: 'Boss fight theme', img: 'sapo.png', audio: '', yt: 'Acw1nw_gjHw',
         text: 'The track behind the fight with the Yakuza Crane, composed, mixed and mastered for the boss battle.' },
       { id: 'last-beat', type: 'Music', title: 'The Last Beat OST', from: 'The Last Beat', use: 'Full soundtrack', img: 'lastbeat.png', audio: '',
         sc: 'https://api.soundcloud.com/playlists/1713625641', scLink: 'https://soundcloud.com/literalvarez/sets/beat-down-ost', cover: 'https://i1.sndcdn.com/artworks-aAYozybH5YA75yZz-ULlB0Q-t500x500.jpg',

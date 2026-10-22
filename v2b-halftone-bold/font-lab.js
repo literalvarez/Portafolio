@@ -32,7 +32,7 @@
     document.head.appendChild(link);
   }
 
-  let state = { title: 'Archivo', body: 'Archivo', open: true };
+  let state = { title: 'Archivo', body: 'Archivo', open: false };   // hidden until opened from the Tools menu (or F)
   try { Object.assign(state, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
 
   function apply() {
@@ -57,7 +57,7 @@
       padding: 14px; border-radius: 14px; background: #0B0F24F2; color: #fff; border: 1px solid #ffffff2e;
       font: 500 13px/1.3 system-ui, sans-serif; box-shadow: 0 20px 50px -20px #000; backdrop-filter: blur(8px); }
     .font-lab * { font-family: system-ui, sans-serif; }
-    .font-lab.closed > :not(.fl-head) { display: none; }
+    .font-lab.closed { display: none; }
     .font-lab .fl-head { display: flex; justify-content: space-between; align-items: center; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; font-size: 11px; }
     .font-lab label { display: block; margin: 12px 0 4px; font-size: 11px; color: #ffffffa8; text-transform: uppercase; letter-spacing: .06em; }
     .font-lab .fl-row { display: flex; gap: 6px; }
@@ -71,7 +71,7 @@
   const panel = document.createElement('div');
   panel.className = 'font-lab';
   panel.innerHTML = `
-    <div class="fl-head"><span>Font lab</span><button data-a="toggle" title="F">–</button></div>
+    <div class="fl-head"><span>Font lab</span><button data-a="toggle" title="F">×</button></div>
     <label>Titles</label>
     <div class="fl-row"><button data-a="t-prev">‹</button><input data-f="title" list="fl-title"><button data-a="t-next">›</button></div>
     <label>Descriptions</label>
@@ -113,5 +113,10 @@
     else if (e.key === 'f' || e.key === 'F') { state.open = !state.open; apply(); }
   });
 
+  window.LABS && window.LABS.register('Font lab', {
+    toggle: () => { state.open = !state.open; apply(); },
+    isOpen: () => state.open,
+    key: 'F'
+  });
   apply();
 })();
