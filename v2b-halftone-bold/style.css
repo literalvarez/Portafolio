@@ -1,10 +1,9 @@
-/* Conthrax (titles): self-hosted, SemiBold is the only weight we have, so it is used for every title weight */
-@font-face { font-family: 'Conthrax'; src: url('../assets/fonts/conthrax.otf') format('opentype'); font-weight: 100 900; font-display: swap; }
-
   /* ---------- Bolder palette: black, white and a wider range of blues ---------- */
+  /* Michroma only has one weight: stop browsers faking a bolder version of it */
+  html { font-synthesis: none; }
   :root {
     --font: 'Montserrat', system-ui, sans-serif;
-    --display: 'Conthrax', system-ui, sans-serif;
+    --display: 'Michroma', system-ui, sans-serif;
     --hl: var(--blue-1);              /* highlight dots / hard shadows */
     --band: var(--blue-2);
     --band-deep: var(--blue-1);
@@ -28,6 +27,8 @@
   :root[data-theme="dark"] .btn, :root[data-theme="dark"] .project .role { background: var(--blue-2); }
 
   h1, h2, h3, .section-title, .logo, .num { font-family: var(--display); }
+  /* Michroma has a single, light weight: thicken the titles with an outline in their own colour */
+  h1, h2, h3, .section-title, .logo { -webkit-text-stroke: .035em currentColor; paint-order: stroke fill; }
   body { font-size: 18px; }
 
   /* Hexagonal halftone pattern, reused everywhere (rows offset by half a cell, spaced √3/2) */
@@ -311,7 +312,15 @@
     padding: 5px 9px; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity .2s, translate .2s;
   }
   .contact-dock a:hover::after { opacity: 1; translate: 0 -50%; }
-  @media (max-width: 760px) { .contact-dock { right: 10px; } .contact-dock a { width: 34px; height: 34px; } }
+  /* phones: a small row in the top-right corner, just under the top bar */
+  @media (max-width: 760px) {
+    .contact-dock { top: 78px; right: 12px; translate: none; flex-direction: row; gap: 6px; }
+    .contact-dock a { width: 34px; height: 34px; }
+    .contact-dock a:hover { transform: translateY(-2px); }
+    .contact-dock a::after { display: none; }
+  }
+  @keyframes dockInMobile { from { opacity: 0; transform: translateY(-12px); } }
+  @media (max-width: 760px) { .contact-dock { animation-name: dockInMobile; } }
   @media (prefers-reduced-motion: reduce) { .contact-dock { animation: none; } }
 
   /* ---------- Softer light mode: blue-grey between #CCD3E6 and #DFE5F4 ---------- */

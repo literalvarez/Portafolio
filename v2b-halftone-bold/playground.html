@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en" data-home="index.html" data-hobbies="hobbies.html" data-dock>
+<html lang="en" data-home="index.html" data-playground="playground.html" data-dock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="../assets/logo-64.png">
 <link rel="apple-touch-icon" href="../assets/logo-256.png">
-<title>Hobbies · Tomas Alvarez</title>
+<title>Playground · Tomas Alvarez</title>
 <meta name="description" content="Music, experiments and passion projects by Tomas Alvarez.">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared/base.css">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -92,7 +92,7 @@
   .track:has(.cover.playing) { grid-template-columns: 240px 1fr; }
   .cover.playing { aspect-ratio: 16 / 9; }
   @media (max-width: 480px) { .track:has(.cover.playing) { grid-template-columns: 1fr; } }
-  /* ---------- Video cards: the main way hobbies are shown ---------- */
+  /* ---------- Video cards: the main way playground items are shown ---------- */
   .videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 24px; }
   .vcard { scroll-margin-top: 100px; }
   .yt {
@@ -162,8 +162,8 @@
 <body id="top">
 <section class="pg-hero">
   <div class="wrap">
-    <a class="back" href="index.html#hobbies"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to home</a>
-    <span class="eyebrow">Hobbies</span>
+    <a class="back" href="index.html#playground"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to home</a>
+    <span class="eyebrow">Playground</span>
     <h1>Passion <span>projects</span></h1>
     <p>The things I make for fun: music I compose as TERAL and for my games, audio-reactive visuals, interactive experiments, and games I've made at game jams.</p>
   </div>
@@ -189,7 +189,7 @@
 
     document.getElementById('groups').innerHTML = types.map(type => {
       const list = items.filter(i => i.type === type);
-      const videos = list.filter(t => t.yt);          // YouTube is the main way to show a hobby
+      const videos = list.filter(t => t.yt);          // YouTube is the main way to show an item
       const sets = list.filter(t => !t.yt && t.sc);              // SoundCloud tracks/playlists
       const games = list.filter(t => !t.yt && !t.sc && t.link);  // playable games (e.g. game jams) get itch.io cards
       const others = list.filter(t => !t.yt && !t.sc && !t.link); // MP3-only (or not ready yet) items get compact rows

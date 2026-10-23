@@ -3,7 +3,7 @@
    Shortcuts: [ / ] cycle title font, { / } (shift) cycle body font, F toggles the panel. */
 (function () {
   const TITLE_FONTS = [
-    'Archivo', 'Conthrax', 'Need Every Sound', 'Work Sans', 'Archivo Black', 'Anton', 'Bebas Neue', 'Oswald', 'Space Grotesk', 'Syne', 'Unbounded',
+    'Michroma', 'Archivo', 'Audiowide', 'Work Sans', 'Archivo Black', 'Anton', 'Bebas Neue', 'Oswald', 'Space Grotesk', 'Syne', 'Unbounded',
     'Bricolage Grotesque', 'Big Shoulders Display', 'Familjen Grotesk', 'Instrument Sans',
     'Inter Tight', 'Manrope', 'Montserrat', 'Outfit', 'Sora', 'Lexend', 'Rubik', 'Darker Grotesque',
     'Archivo Narrow', 'Barlow Condensed', 'Fjalla One', 'League Spartan', 'Chakra Petch', 'Orbitron',
@@ -11,19 +11,18 @@
     'DM Serif Display', 'Playfair Display', 'Fraunces', 'Instrument Serif', 'Space Mono', 'JetBrains Mono'
   ];
   const BODY_FONTS = [
-    'Archivo', 'Work Sans', 'Conthrax', 'Need Every Sound', 'Inter', 'DM Sans', 'Manrope', 'Plus Jakarta Sans', 'Outfit', 'Sora', 'Lexend', 'Figtree',
+    'Montserrat', 'Archivo', 'Work Sans', 'Inter', 'DM Sans', 'Manrope', 'Plus Jakarta Sans', 'Outfit', 'Sora', 'Lexend', 'Figtree',
     'IBM Plex Sans', 'Space Grotesk', 'Instrument Sans', 'Nunito Sans', 'Rubik', 'Karla',
-    'Public Sans', 'Albert Sans', 'Onest', 'Geist', 'Barlow', 'Source Sans 3', 'Poppins', 'Montserrat',
+    'Public Sans', 'Albert Sans', 'Onest', 'Geist', 'Barlow', 'Source Sans 3', 'Poppins',
     'Atkinson Hyperlegible', 'Space Mono', 'IBM Plex Mono', 'JetBrains Mono', 'Fraunces', 'Literata'
   ];
   const KEY = 'font-lab';
   const root = document.documentElement;
-  const loaded = new Set(['Montserrat', 'Conthrax']);   // the site's defaults are already loaded by the page
+  const loaded = new Set(['Montserrat', 'Michroma']);   // the site's defaults are already loaded by the page
 
   // Fonts that aren't on Google Fonts: files kept in assets/fonts/ (checked in order, first one found is used).
   const LOCAL_FONTS = {
-    'Conthrax': ['../assets/fonts/conthrax.otf'],
-    'Need Every Sound': ['../assets/fonts/need-every-sound.ttf']
+    // e.g. 'My Font': ['../assets/fonts/my-font.woff2']   (only fonts you're licensed to host)
   };
 
   function load(name) {
@@ -47,7 +46,7 @@
     document.head.appendChild(link);
   }
 
-  let state = { title: 'Conthrax', body: 'Montserrat', open: false };   // hidden until opened from the Tools menu (or F)
+  let state = { title: 'Michroma', body: 'Montserrat', open: false };   // hidden until opened from the Tools menu (or F)
   try { Object.assign(state, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
 
   function apply() {
@@ -107,7 +106,7 @@
     if (a === 'b-prev') step('body', -1);
     if (a === 'b-next') step('body', 1);
     if (a === 'same') { state.body = state.title; apply(); }
-    if (a === 'reset') { state.title = 'Conthrax'; state.body = 'Montserrat'; apply(); }
+    if (a === 'reset') { state.title = 'Michroma'; state.body = 'Montserrat'; apply(); }
     if (a === 'copy') {
       const text = `--font: '${state.body}', system-ui, sans-serif;\n--display: '${state.title}', system-ui, sans-serif;`;
       navigator.clipboard && navigator.clipboard.writeText(text);

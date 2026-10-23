@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en" data-hobbies="hobbies.html" data-dock>
+<html lang="en" data-playground="playground.html" data-dock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="../assets/logo-64.png">
 <link rel="apple-touch-icon" href="../assets/logo-256.png">
 <title>Tomas Alvarez</title>
-<meta name="description" content="Tomas Alvarez, Game Designer based in Vancouver, Canada.">
+<meta name="description" content="Tomas Alvarez, Game Designer with a UI/UX background, based in Vancouver, Canada.">
 <!-- Dark by default; the toggle still remembers a visitor's choice -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared/base.css">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
   <div class="wrap">
     <h1><span class="line"><span>Tomas</span></span><span class="line"><span class="blue">Alvarez</span></span></h1>
     <div class="hero-bottom fade-in">
-      <p class="lede">Designing and developing games that are <b>fun, cohesive and memorable</b>, bringing design, code, art and sound together into gameplay.</p>
+      <p class="lede">Designing games that are <b>fun, cohesive and memorable</b>, with a strong focus on player experience, bringing design, code, art and sound together into gameplay.</p>
       <a class="btn" href="#work">See my work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </div>
   </div>
@@ -41,17 +41,17 @@
   </div>
 </section>
 
-<section class="playground" id="hobbies">
+<section class="playground" id="playground">
   <div class="wrap pg-head">
     <div>
-      <span class="eyebrow reveal">Hobbies</span>
+      <span class="eyebrow reveal">Playground</span>
       <h2 class="section-title reveal">Passion projects</h2>
       <p class="reveal">Music, experiments and the other things I make for fun.</p>
     </div>
     <div class="pg-actions reveal">
       <button class="pg-arrow" data-dir="-1" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button class="pg-arrow" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-      <a class="btn sm" href="hobbies.html">See all hobbies <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      <a class="btn sm" href="playground.html">Open playground <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
     </div>
   </div>
   <div class="pg-track" id="pgTrack"></div>
@@ -66,8 +66,9 @@
     </figure>
     <div class="about-body">
       <h2 class="about-title reveal">About</h2>
-      <p class="reveal" data-delay="1">Hi! I'm Tomas, a Game Designer &amp; Developer from Medellín, Colombia, now based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive and memorable.</p>
+      <p class="reveal" data-delay="1">Hi! I'm Tomas, a Game Designer from Medellín, Colombia, now based in Vancouver, Canada, with a passion for creating experiences that are fun, cohesive and memorable.</p>
       <p class="reveal" data-delay="1">Since 2018 I've been building skills across Design, Programming, Production, Art and Audio, because understanding how a game comes together as a whole makes me a better designer for every part of it.</p>
+      <p class="reveal" data-delay="1">I studied Game Design, UI/UX Design and Digital Entertainment Design Engineering, so I care a lot about how players feel when they play: clear interfaces, good feedback, and experiences that are easy to pick up and hard to put down.</p>
       <p class="reach-line reveal" data-delay="2">Feel free to reach out! I'd love to talk about games, music, or any project you have in mind.</p>
       <div class="reach-actions reveal" data-delay="2">
         <a class="btn" href="https://www.linkedin.com/in/gdtomasalvarez/" target="_blank" rel="noopener">LinkedIn <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
@@ -104,10 +105,10 @@
     if (location.hash === '#about') addEventListener('load', () => centre(false));
   })();
 
-  // ---------- Hobbies scroller ----------
+  // ---------- Playground scroller ----------
   (function () {
     const track = document.getElementById('pgTrack');
-    // one icon per hobby category (falls back to the music bars)
+    // one icon per playground category (falls back to the music bars)
     const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
     const icons = {
       'Music': '<span class="eq"><i></i><i></i><i></i><i></i><i></i></span>',
@@ -116,20 +117,20 @@
       'Visuals': svg('<circle cx="12" cy="12" r="3"/><path class="ring" d="M12 4.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15z"/>')
     };
     const icon = type => `<span class="pg-icon" data-type="${type}">${icons[type] || icons.Music}</span>`;
-    // home carousel: one music card per game (items marked home: false only appear on the Hobbies page)
-    // hobbies unrelated to the showcased projects come first, then the music from those games
+    // home carousel: one music card per game (items marked home: false only appear on the Playground page)
+    // items unrelated to the showcased projects come first, then the music from those games
     const projectTitles = SITE.projects.map(p => p.title);
     const related = p => projectTitles.includes(p.from);
     const cards = SITE.playground.filter(p => p.home !== false);
     track.innerHTML = [...cards.filter(p => !related(p)), ...cards.filter(related)].map((p, i) => `
-      <a class="pg-card" href="hobbies.html#${p.id}" style="--i:${i}" draggable="false">
+      <a class="pg-card" href="playground.html#${p.id}" style="--i:${i}" draggable="false">
         <img src="${/^https?:/.test(p.img) ? p.img : `../assets/${p.img}`}" alt="" loading="lazy" draggable="false">
         <span class="pg-tag">${p.type}</span>
         ${icon(p.type)}
         <span class="pg-text"><b>${p.title}</b><small>${p.from} · ${p.use}</small></span>
       </a>`).join('') + `
-      <a class="pg-card pg-more" href="hobbies.html" draggable="false">
-        <span class="pg-text"><b>See everything</b><small>Open hobbies</small></span>
+      <a class="pg-card pg-more" href="playground.html" draggable="false">
+        <span class="pg-text"><b>See everything</b><small>Open playground</small></span>
         <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>`;
 

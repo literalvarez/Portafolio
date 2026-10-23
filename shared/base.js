@@ -32,7 +32,7 @@
         highlights: ['Rhythm-based combat system synced to the music', 'Progressive difficulty tuned through playtesting', 'Composed a 4-to-the-floor soundtrack that rises in BPM'],
         tools: ['Unity'] }
     ],
-    // Hobbies / passion projects. Media, in order of preference: a YouTube id (`yt`), a SoundCloud track/playlist (`sc`), an itch.io `link`, or an MP3 (`audio`, in /assets).
+    // Playground / passion projects. Media, in order of preference: a YouTube id (`yt`), a SoundCloud track/playlist (`sc`), an itch.io `link`, or an MP3 (`audio`, in /assets).
     playground: [
       { id: 'away', home: false, type: 'Music', title: 'Away', from: 'Atomic Overdrive', use: 'Title screen theme', img: 'atomic.jpg', audio: '', yt: 'S2U2jHfkpVc',
         text: 'One of two songs I composed and produced for Atomic Overdrive, written for the title screen.' },
@@ -49,7 +49,7 @@
         text: 'Exploration of TouchDesigner and audio-reactive visuals, in a visualizer for Last Chance, a track I released under my artist name TERAL.' },
       { id: 'drum-machine', type: 'Experiments', title: 'Drum Machine + Piano', from: 'Unity · FMOD', use: 'Interactive instrument', img: 'https://i.ytimg.com/vi/L3kxfLVc4HI/maxresdefault.jpg', audio: '', yt: 'L3kxfLVc4HI',
         text: 'An interactive drum machine and piano I built in Unity, with all the sound driven through FMOD.' },
-      // Game jam games: shown as itch.io cards (img = still for the home scroller, cover = what the Hobbies page shows)
+      // Game jam games: shown as itch.io cards (img = still for the home scroller, cover = what the Playground page shows)
       { id: 'moonless-night', type: 'Game jams', title: 'Moonless Night', from: 'AMIX Game Jam 2026', use: '2D top-down survival', img: 'jams/moonless-night.jpg', cover: 'jams/moonless-night.gif', link: 'https://saraqgames.itch.io/moonless-night', role: 'Game Design, Code, VFX & Lighting', team: 'with _saraqg & seuhans',
         text: 'Read the signals that warn where the UFOs are coming from to avoid being abducted, while dodging the snails that never stop following you.' },
       { id: 'my-lover-is-a-storm', type: 'Game jams', title: 'My Lover Is A Storm', from: 'Brackeys Game Jam 2024.2', use: 'Bullet hell · Visual novel', img: 'jams/my-lover-is-a-storm.png', link: 'https://fuann.itch.io/my-lover-is-a-storm', role: 'Game Design, Audio & Programming', team: 'with Fuan & dreimer64', pixel: true,
@@ -83,7 +83,7 @@
     <nav class="nav-links">
       <a href="${home}#work" class="hide-sm">Work</a>
       <a href="${home}#about" class="hide-sm">About</a>
-      ${root.dataset.hobbies ? `<a href="${root.dataset.hobbies}" class="hide-sm">Hobbies</a>` : ""}
+      ${root.dataset.playground ? `<a href="${root.dataset.playground}" class="hide-sm">Playground</a>` : ""}
       <a href="${site.links.resume}" target="_blank" rel="noopener">Resume</a>
       ${dock ? "" : `<a href="${site.links.linkedin}" target="_blank" rel="noopener" class="hide-sm">LinkedIn</a>`}
       ${dock ? "" : `<a href="${site.links.email}">Email</a>`}
