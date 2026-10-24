@@ -1,7 +1,7 @@
 // Shared bits for every version: content, nav, theme toggle, scroll reveals.
 (function () {
   const root = document.documentElement;
-  const assets = root.dataset.assets || '../assets/';
+  const assets = root.dataset.assets || 'assets/';
   const home = root.dataset.home || '';   // set on sub-pages so nav links point back to the home page
   const dock = 'dock' in root.dataset;     // pages with the floating contact dock drop LinkedIn/Email from the nav
 

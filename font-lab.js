@@ -22,7 +22,7 @@
 
   // Fonts that aren't on Google Fonts: files kept in assets/fonts/ (checked in order, first one found is used).
   const LOCAL_FONTS = {
-    // e.g. 'My Font': ['../assets/fonts/my-font.woff2']   (only fonts you're licensed to host)
+    // e.g. 'My Font': ['assets/fonts/my-font.woff2']   (only fonts you're licensed to host)
   };
 
   function load(name) {

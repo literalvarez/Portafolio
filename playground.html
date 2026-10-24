@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="../assets/logo-64.png">
-<link rel="apple-touch-icon" href="../assets/logo-256.png">
+<link rel="icon" type="image/png" href="assets/logo-64.png">
+<link rel="apple-touch-icon" href="assets/logo-256.png">
 <title>Playground · Tomas Alvarez</title>
 <meta name="description" content="Music, experiments and passion projects by Tomas Alvarez.">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="shared/base.css">
 <link rel="stylesheet" href="style.css">
 <style>
   .pg-hero { position: relative; padding: 150px 0 60px; overflow: hidden; }
@@ -174,7 +174,7 @@
   <main id="groups"></main>
 </div>
 
-<script src="../shared/base.js"></script>
+<script src="shared/base.js"></script>
 <script>
   renderFooter();
   renderContactDock();
@@ -193,7 +193,7 @@
       const sets = list.filter(t => !t.yt && t.sc);              // SoundCloud tracks/playlists
       const games = list.filter(t => !t.yt && !t.sc && t.link);  // playable games (e.g. game jams) get itch.io cards
       const others = list.filter(t => !t.yt && !t.sc && !t.link); // MP3-only (or not ready yet) items get compact rows
-      const src = p => /^https?:/.test(p) ? p : `../assets/${p}`;
+      const src = p => /^https?:/.test(p) ? p : `assets/${p}`;
       const seek = t => `<div class="progress-bar" role="slider" aria-label="Seek ${t.title}"><i></i></div>`;
       return `<section class="group" id="${slug(type)}">
         <div class="group-head"><h2>${type}</h2><i></i><span>${list.length} ${list.length === 1 ? 'item' : 'items'}</span></div>
@@ -205,7 +205,7 @@
                 <span class="kind">${t.use}</span>
                 <h3>${t.title}</h3>
                 <p>${t.text}</p>
-                ${t.audio ? `<div class="mini"><button class="play" data-src="../assets/${t.audio}" aria-label="Play ${t.title} audio only">${playIcon}</button><span class="label">Audio only</span>${seek(t)}<span class="time">0:00</span></div>` : ''}
+                ${t.audio ? `<div class="mini"><button class="play" data-src="assets/${t.audio}" aria-label="Play ${t.title} audio only">${playIcon}</button><span class="label">Audio only</span>${seek(t)}<span class="time">0:00</span></div>` : ''}
               </div>
             </article>`).join('')}
           ${sets.map((t, i) => `
@@ -245,8 +245,8 @@
           ${others.map((t, i) => `
             <article class="track pv-in" id="${t.id}" data-item style="--d:${i * 60}ms">
               <div class="cover">
-                <img src="${/^https?:/.test(t.img) ? t.img : `../assets/${t.img}`}" alt="" loading="lazy">
-                <button class="play" ${t.audio ? `data-src="../assets/${t.audio}"` : 'disabled'} aria-label="Play ${t.title}">${playIcon}</button>
+                <img src="${/^https?:/.test(t.img) ? t.img : `assets/${t.img}`}" alt="" loading="lazy">
+                <button class="play" ${t.audio ? `data-src="assets/${t.audio}"` : 'disabled'} aria-label="Play ${t.title}">${playIcon}</button>
               </div>
               <div>
                 <span class="kind">${t.use}</span>

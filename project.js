@@ -1,5 +1,5 @@
 // Shared behaviour for project case-study pages.
-// Usage: initProjectPage({ gallery: [{ t: 'Title', c: 'Caption', src: '../assets/...' }, ...] })
+// Usage: initProjectPage({ gallery: [{ t: 'Title', c: 'Caption', src: 'assets/...' }, ...] })
 window.initProjectPage = function ({ gallery = [] } = {}) {
   renderFooter();
   renderContactDock();
