@@ -16,7 +16,8 @@
     'Public Sans', 'Albert Sans', 'Onest', 'Geist', 'Barlow', 'Source Sans 3', 'Poppins',
     'Atkinson Hyperlegible', 'Space Mono', 'IBM Plex Mono', 'JetBrains Mono', 'Fraunces', 'Literata'
   ];
-  const KEY = 'font-lab';
+  // each site keeps its own saved choice: <script src="font-lab.js" data-key="ux-font-lab">
+  const KEY = (document.currentScript && document.currentScript.dataset.key) || 'font-lab';
   const root = document.documentElement;
   const loaded = new Set(['Montserrat', 'Michroma']);   // the site's defaults are already loaded by the page
 

@@ -61,20 +61,38 @@ p { margin: 0 0 1em; }
 .case-card { display: grid; grid-template-columns: 1.15fr 1fr; border-radius: var(--radius); overflow: hidden; background: var(--surface); border: 1px solid var(--line); transition: transform .3s, box-shadow .3s; }
 .case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .case-media { position: relative; background: #C7B1EC; padding: 44px 28px 0; display: flex; flex-direction: column; align-items: center; overflow: hidden; min-height: 380px; }
-.case-phones { display: flex; gap: 14px; justify-content: center; align-items: flex-start; margin-bottom: -18%; }
-.case-phones img { width: 30%; border-radius: 18px; box-shadow: 0 16px 30px -16px rgba(40, 10, 120, .5); transition: transform .4s; }
-.case-phones img:nth-child(2) { transform: translateY(-14px); }
-.case-card:hover .case-phones img { transform: translateY(-8px); }
-.case-card:hover .case-phones img:nth-child(2) { transform: translateY(-20px); }
-/* website card: two browser pages, offset, that lift on hover */
 .case-card + .case-card { margin-top: 26px; }
-.case-media.web-media { background: linear-gradient(160deg, #E4E6DC, #B9BFAA); }
-.case-webs { position: relative; width: 100%; flex: 1; min-height: 320px; }
-.case-webs img { position: absolute; width: 70%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: 10px; box-shadow: 0 18px 34px -18px rgba(37, 40, 33, .6); transition: transform .4s; }
-.case-webs img:nth-child(1) { left: 2%; top: 8px; }
-.case-webs img:nth-child(2) { right: 2%; top: 64px; z-index: 2; }
-.case-card:hover .case-webs img:nth-child(1) { transform: translateY(-8px); }
-.case-card:hover .case-webs img:nth-child(2) { transform: translateY(-16px); }
+/* angled 3D scenes: three screens laid on a tilted plane, stepping up toward the viewer, lifting further on hover */
+.case-media.scene { padding: 0; perspective: 1600px; }
+.scene .tilt { position: absolute; left: 50%; top: 50%; width: min(112%, 720px); display: flex; gap: 6%; align-items: flex-start;
+  transform: translate(-50%, -46%) rotateX(50deg) rotateZ(-30deg); transform-style: preserve-3d; }
+.scene img { flex: 1; min-width: 0; border-radius: 16px; box-shadow: 18px 28px 40px -14px var(--scene-shadow, rgba(40, 10, 120, .45)); transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.scene img:nth-child(2) { transform: translateZ(36px); }
+.scene img:nth-child(3) { transform: translateZ(72px); }
+.case-card:hover .scene img:nth-child(1) { transform: translateZ(18px); }
+.case-card:hover .scene img:nth-child(2) { transform: translateZ(64px); }
+.case-card:hover .scene img:nth-child(3) { transform: translateZ(110px); }
+.scene-pc { background: linear-gradient(160deg, #EEEFE8, #B9BFAA) !important; --scene-shadow: rgba(37, 40, 33, .45); }
+.scene-pc img { aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 8px; }
+.scene-rh { background: radial-gradient(70% 70% at 60% 40%, #3A4A1C, #151515 75%) !important; --scene-shadow: rgba(0, 0, 0, .6); }
+/* resume page: the PDF pages on white paper cards */
+.r-hero { padding-bottom: 24px; }
+.r-bar { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
+.r-bar p { margin: 0; color: var(--muted); }
+.r-bar .hero-cta { margin-top: 0; }
+.r-pages { display: grid; gap: 22px; justify-items: center; padding: 18px 0 40px; }
+.r-page { position: relative; width: 100%; max-width: 860px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow), 0 1px 3px rgba(11, 22, 64, .08); }
+.r-page canvas { display: block; width: 100%; height: auto; }
+.r-page a { position: absolute; display: block; border-radius: 2px; }
+.r-page a:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); outline: 1.5px solid color-mix(in srgb, var(--accent) 50%, transparent); }
+.r-loading { padding: 60px 0; text-align: center; color: var(--muted); }
+.r-fallback { width: 100%; max-width: 860px; height: 80vh; border: 0; border-radius: 8px; background: #fff; }
+/* hero statement; case cards end with a short line of numbers */
+.statement { font-size: clamp(22px, 2.6vw, 34px); font-weight: 600; line-height: 1.25; color: var(--text); margin: 0 0 16px; max-width: 22em; }
+.statement b { color: var(--accent); font-weight: 700; }
+.case-nums { list-style: none; padding: 0; margin: 2px 0 4px; display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.case-nums li { display: flex; flex-direction: column; font-size: 14px; color: var(--muted); }
+.case-nums b { font-size: 22px; font-weight: 800; color: var(--text); line-height: 1.1; }
 .case-info { padding: clamp(24px, 4vw, 44px); display: flex; flex-direction: column; gap: 14px; align-self: center; }
 .case-info h3 { font-size: clamp(28px, 3.4vw, 40px); }
 .case-info p { color: var(--muted); margin: 0; }
@@ -265,9 +283,6 @@ p { margin: 0 0 1em; }
 .bar i { display: block; height: 8px; border-radius: 99px; background: var(--line); position: relative; overflow: hidden; }
 .bar i::after { content: ''; position: absolute; inset: 0 auto 0 0; width: var(--v); background: var(--hl, var(--accent)); border-radius: inherit; }
 .swatches.five { grid-template-columns: repeat(5, 1fr); }
-.rehab-media { padding: 0 !important; display: block !important; }
-.rehab-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.case-card:hover .rehab-media img { transform: scale(1.04); }
 @media (max-width: 900px) {
   .two-phones { grid-template-columns: 1fr; }
   .pair-phones { max-width: 460px; }

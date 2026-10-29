@@ -9,7 +9,8 @@
     name: 'Tomas Alvarez',
     title: 'UX Designer',
     links: {
-      resume: `${R}resume.html`,
+      resume: 'resume.html',
+      resumePdf: `${R}assets/Tomas-Alvarez-Resume.pdf`,
       games: `${R}index.html`,
       linkedin: 'https://www.linkedin.com/in/gdtomasalvarez/',
       email: 'mailto:tomas1alvares@gmail.com'
@@ -193,8 +194,7 @@
         <nav class="nav-links">
           <a href="${home}#work">Work</a>
           <a href="${home}#about" class="hide-sm">About</a>
-          <a href="${site.links.resume}" class="hide-sm">Resume</a>
-          <a href="${site.links.games}" class="pill">Game design ${arrow}</a>
+          <a href="${site.links.resume}">Resume</a>
         </nav>
       </header>`);
     const n = document.querySelector('.nav');
@@ -268,6 +268,22 @@
   const label = (n, t) => `<span class="label reveal">${n ? `<b>${n}</b>` : ''}${t}</span>`;
 
   // ---------- Home ----------
+  // home cards: what Tomas did on each project, with numbers from the case studies
+  const cards = [
+    { id: 'lc', href: 'last-cow.html', title: lc.title, tags: ['Mobile app', 'UX research', 'UI design'],
+      shots: ['lastcow/login.jpg', 'lastcow/home.jpg', 'lastcow/event.jpg'],
+      did: 'I led research and design for a last-minute ticket app, from surveys and a tree test to an Atomic Design UI kit and a tested prototype.',
+      nums: [['25', 'surveys'], ['5', 'interviews'], ['5', 'usability tests']] },
+    { id: 'pc', href: 'perfecto-cafe.html', title: pc.title, tags: ['Website', 'Heuristic evaluation', 'UI design'],
+      shots: ['perfecto/home.jpg', 'perfecto/menu.jpg', 'perfecto/contact.jpg'],
+      did: 'I audited a bakery café\'s website against usability heuristics and redesigned its menu into a grid that\'s quick to scan.',
+      nums: [['10', 'heuristics'], ['4', 'pages redesigned'], ['2', 'weeks']] },
+    { id: 'rh', href: 'rehab.html', title: rh.title, tags: ['Mobile app', 'UX research', 'Usability testing'],
+      shots: ['rehab/home.jpg', 'rehab/progress.jpg', 'rehab/congrats.jpg'],
+      did: 'I framed the problem through research and ran usability testing for an app that helps patients stick with home rehab.',
+      nums: [['8', 'test participants'], ['100%', 'found the doctor\'s advice'], ['14 s', 'median time']] }
+  ];
+
   function home(el) {
     nav('home');
     el.innerHTML = `
@@ -276,8 +292,8 @@
           <div class="hero-text">
             <h1 class="reveal">Tomas<br>Alvarez</h1>
             <p class="role reveal">${site.title}</p>
-            <p class="lede reveal">Designing digital experiences that are <b>clear, useful and memorable</b>, from research and wireframes to polished UI and prototypes.</p>
-            <div class="hero-cta reveal"><a class="btn" href="#work">See my work ${arrow}</a><a class="btn ghost" href="#about">About me</a></div>
+            <p class="statement reveal">I design apps the way good games are made: around <b>motivation, feedback and flow</b>.</p>
+            <p class="lede reveal">With a background in engineering and game design, I turn research and testing into products people stick with.</p>            <div class="hero-cta reveal"><a class="btn" href="#work">See my work ${arrow}</a><a class="btn ghost" href="#about">About me</a></div>
           </div>
         </div>
       </section>
@@ -286,40 +302,17 @@
         <div class="wrap">
           ${label('', 'Selected work')}
           <h2 class="title reveal">Case studies</h2>
-          <a class="case-card reveal" href="last-cow.html">
-            <div class="case-media">
-              <div class="case-phones">${['home.jpg', 'login.jpg', 'past-detail.jpg'].map(f => `<img src="${img(f)}" alt="" loading="lazy">`).join('')}</div>
-            </div>
+          ${cards.map(c => `
+          <a class="case-card reveal" href="${c.href}">
+            <div class="case-media scene scene-${c.id}"><div class="tilt">${c.shots.map(s => `<img src="${R}assets/${s}" alt="" loading="lazy">`).join('')}</div></div>
             <div class="case-info">
-              <span class="tags"><span>Mobile app</span><span>UX research</span><span>UI design</span></span>
-              <h3>${lc.title}</h3>
-              <p>${lc.summary}</p>
-              <span class="case-meta">UX/UI Designer · 2-person team · 4 weeks · Figma</span>
+              <span class="tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</span>
+              <h3>${c.title}</h3>
+              <p>${c.did}</p>
+              <ul class="case-nums">${c.nums.map(([n, t]) => `<li><b>${n}</b>${t}</li>`).join('')}</ul>
               <span class="more">Read case study ${arrow}</span>
             </div>
-          </a>
-          <a class="case-card reveal" href="perfecto-cafe.html">
-            <div class="case-media web-media">
-              <div class="case-webs"><img src="${R}assets/perfecto/menu.jpg" alt="" loading="lazy"><img src="${R}assets/perfecto/home.jpg" alt="" loading="lazy"></div>
-            </div>
-            <div class="case-info">
-              <span class="tags"><span>Website</span><span>Heuristic evaluation</span><span>UI design</span></span>
-              <h3>${pc.title}</h3>
-              <p>${pc.summary}</p>
-              <span class="case-meta">UX/UI Designer · 3-person team · 2 weeks · Figma</span>
-              <span class="more">Read case study ${arrow}</span>
-            </div>
-          </a>
-          <a class="case-card reveal" href="rehab.html">
-            <div class="case-media rehab-media"><img src="${R}assets/rehab/mockup.jpg" alt="" loading="lazy"></div>
-            <div class="case-info">
-              <span class="tags"><span>Mobile app</span><span>UX research</span><span>Usability testing</span></span>
-              <h3>${rh.title}</h3>
-              <p>${rh.summary}</p>
-              <span class="case-meta">UX Researcher & Designer · 4-person team · 2-week sprint · Figma</span>
-              <span class="more">Read case study ${arrow}</span>
-            </div>
-          </a>
+          </a>`).join('')}
         </div>
       </section>
 
@@ -334,7 +327,7 @@
             <p class="reveal">I bring that to every product I work on: research to understand people, simple flows and wireframes to test ideas early, and polished UI and prototypes to bring them to life.</p>
             <p class="skills-line reveal">${site.skills.map(([n]) => `<span>${n}</span>`).join('')}</p>
             <p class="reveal">Feel free to reach out! I'd love to talk about design, research, or any project you have in mind.</p>
-            <div class="hero-cta reveal"><a class="btn" href="${site.links.linkedin}" target="_blank" rel="noopener">LinkedIn ${arrow}</a><a class="btn ghost" href="${site.links.resume}">Resume ${arrow}</a></div>
+            <div class="hero-cta reveal"><a class="btn" href="${site.links.linkedin}" target="_blank" rel="noopener">LinkedIn ${arrow}</a><a class="btn ghost" href="${site.links.resume}">Resume ${arrow}</a><a class="btn ghost" href="${site.links.games}">Game Design ${arrow}</a></div>
           </div>
         </div>
       </section>`;
@@ -666,5 +659,70 @@
     footer(); reveal(); lightbox();
   }
 
-  window.UX = { site, lastcow: lc, perfecto: pc, rehab: rh, home, caseStudy, perfectoStudy: perfecto, rehabStudy: rehab };
+  // ---------- Resume page: the PDF drawn page by page (pdf.js), with its links laid on top ----------
+  function resume(el) {
+    nav('resume');
+    const pdfUrl = site.links.resumePdf;
+    el.innerHTML = `
+      <section class="cs-hero r-hero" id="top">
+        <div class="wrap">
+          <a class="back" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All work</a>
+          <span class="eyebrow reveal">Resume</span>
+          <h1 class="reveal">${site.name}</h1>
+          <div class="r-bar reveal">
+            <p>${site.title} · Vancouver, Canada</p>
+            <div class="hero-cta">
+              <a class="btn" href="${pdfUrl}" download>Download PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
+              <a class="btn ghost" href="${pdfUrl}" target="_blank" rel="noopener">Open full screen ${arrow}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="wrap"><div class="r-pages" id="pages"><div class="r-loading">Loading resume…</div></div></section>`;
+    footer(); reveal();
+
+    const box = el.querySelector('#pages');
+    const fallback = () => { box.innerHTML = `<iframe class="r-fallback" src="${pdfUrl}" title="${site.name} resume"></iframe>`; };
+    if (!window.pdfjsLib) return fallback();
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    (async () => {
+      let pdf;
+      try { pdf = await pdfjsLib.getDocument(pdfUrl).promise; } catch (e) { return fallback(); }
+      async function render() {
+        const width = Math.min(box.clientWidth, 860);
+        const dpr = Math.min(devicePixelRatio || 1, 2.5);
+        const frag = document.createDocumentFragment();
+        for (let n = 1; n <= pdf.numPages; n++) {
+          const page = await pdf.getPage(n);
+          const vp = page.getViewport({ scale: width / page.getViewport({ scale: 1 }).width });
+          const wrap = document.createElement('div'); wrap.className = 'r-page';
+          wrap.setAttribute('aria-label', `Resume page ${n} of ${pdf.numPages}`);
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(vp.width * dpr); canvas.height = Math.floor(vp.height * dpr);
+          wrap.appendChild(canvas);
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport: page.getViewport({ scale: vp.scale * dpr }) }).promise;
+          // links (Portfolio, LinkedIn, project names) placed as percentages so they scale with the page
+          for (const a of await page.getAnnotations()) {
+            if (a.subtype !== 'Link' || !a.url) continue;
+            const [x1, y1, x2, y2] = vp.convertToViewportRectangle(a.rect);
+            const link = document.createElement('a');
+            link.href = a.url; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', a.url);
+            Object.assign(link.style, {
+              left: Math.min(x1, x2) / vp.width * 100 + '%', top: Math.min(y1, y2) / vp.height * 100 + '%',
+              width: Math.abs(x2 - x1) / vp.width * 100 + '%', height: Math.abs(y2 - y1) / vp.height * 100 + '%'
+            });
+            wrap.appendChild(link);
+          }
+          frag.appendChild(wrap);
+        }
+        box.replaceChildren(frag);
+      }
+      await render();
+      // redraw sharply after a big resize (e.g. rotating a phone)
+      let lastW = box.clientWidth, t;
+      addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { if (Math.abs(box.clientWidth - lastW) > 80) { lastW = box.clientWidth; render(); } }, 250); });
+    })();
+  }
+
+  window.UX = { site, lastcow: lc, perfecto: pc, rehab: rh, home, caseStudy, perfectoStudy: perfecto, rehabStudy: rehab, resume };
 })();
