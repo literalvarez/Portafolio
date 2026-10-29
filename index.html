@@ -72,7 +72,7 @@
       <p class="reach-line reveal" data-delay="2">Feel free to reach out! I'd love to talk about games, music, or any project you have in mind.</p>
       <div class="reach-actions reveal" data-delay="2">
         <a class="btn" href="https://www.linkedin.com/in/gdtomasalvarez/" target="_blank" rel="noopener">LinkedIn <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-        <a class="btn ghost" href="https://canva.link/gnh4h8pgqpoa1g2" target="_blank" rel="noopener">Resume <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <a class="btn ghost" href="resume.html">Resume <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
       </div>
     </div>
   </div>
@@ -174,7 +174,17 @@
     const pages = { 'Atomic Overdrive': 'atomic-overdrive.html', 'SAPO': 'sapo.html', 'The Last Beat': 'the-last-beat.html' };
     const P = SITE.projects.map(p => ({ ...p, href: pages[p.title] || p.href }));
     const arrow = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>';
-    const media = (p, extra = '') => `<div class="project-media${p.contain ? ' contain' : ''}"><img src="assets/${p.img}" alt="${p.title} key art" loading="lazy">${extra}</div>`;
+    // custom key-art cards, built from game assets instead of a single image
+    const cards = {
+      lastbeat: p => `
+        <img class="lb-bg" src="assets/lastbeat/hero.jpg" alt="${p.title} gameplay" loading="lazy">
+        <div class="lb-art">
+          <img class="lb-logo" src="assets/lastbeat/logo.png" alt="${p.title} logo" loading="lazy">
+        </div>`
+    };
+    const media = (p, extra = '') => p.card && cards[p.card]
+      ? `<div class="project-media card-${p.card}">${cards[p.card](p)}${extra}</div>`
+      : `<div class="project-media${p.contain ? ' contain' : ''}"><img src="assets/${p.img}" alt="${p.title} key art" loading="lazy">${extra}</div>`;
 
     const views = {
       // big 16:9 cards, short summary underneath

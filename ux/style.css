@@ -1,0 +1,39 @@
+/* Calm look: same identity as the game site (Michroma + Montserrat, blue palette), light, quiet and spacious. */
+:root {
+  --bg: #F9FAFE; --surface: #FFFFFF; --text: #0B1640; --muted: #56608A; --line: #DDE3F3;
+  --accent: #2256F2; --accent-ink: #fff;
+  --font: 'Montserrat', system-ui, sans-serif; --display: 'Michroma', sans-serif;
+  --radius: 18px; --shadow: 0 24px 50px -28px rgba(34, 86, 242, .45);
+  --gap: clamp(90px, 12vw, 170px);
+}
+h1, h2, .title, .foot-title { letter-spacing: -.01em; font-weight: 400; }
+.hero h1, .cs-hero h1 { font-size: clamp(42px, 6.6vw, 88px); }
+.title { font-size: clamp(24px, 3.2vw, 38px); }
+h3 { font-family: var(--font); font-weight: 700; }
+.case-info h3 { font-family: var(--display); font-weight: 400; }
+
+/* a soft, still dot field behind the hero (a calm echo of the halftone) */
+.hero, .cs-hero { position: relative; isolation: isolate; }
+.hero::before, .cs-hero::before { content: ''; position: absolute; inset: 0 0 auto; height: 100%; z-index: -1;
+  background: radial-gradient(circle, #88A2F2 1.2px, transparent 1.6px) 0 0 / 22px 22px;
+  -webkit-mask: radial-gradient(70% 60% at 80% 40%, #000, transparent 70%); mask: radial-gradient(70% 60% at 80% 40%, #000, transparent 70%); opacity: .55; }
+
+.case-media { background: linear-gradient(160deg, #C2CEF2, #C7B1EC); }
+.type { border-color: transparent; box-shadow: 0 1px 2px rgba(11, 22, 64, .04), 0 10px 30px -22px rgba(11, 22, 64, .25); }
+.process li { border-color: transparent; background: #E6ECFC; }
+
+/* each case study borrows its project's identity: accent colour, title font and dot colour */
+[data-project="lastcow"] { --accent: #4817C1; --shadow: 0 24px 50px -28px rgba(72, 23, 193, .45); }
+[data-project="lastcow"] .cs-hero h1 { font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: -.03em; }
+[data-project="lastcow"] .cs-hero::before { background-image: radial-gradient(circle, #C7B1EC 1.2px, transparent 1.6px); }
+[data-project="perfecto"] { --accent: #5B6350; --shadow: 0 24px 50px -28px rgba(37, 40, 33, .45); }
+[data-project="perfecto"] .cs-hero h1, [data-project="perfecto"] .title { font-family: 'DM Serif Display', serif; letter-spacing: 0; }
+[data-project="perfecto"] .cs-hero::before { background-image: radial-gradient(circle, #B9BFAA 1.2px, transparent 1.6px); }
+[data-project="rehab"] { --accent: #1B1B1B; --hl: #B4E85C; --hl-soft: #E9F8CF; --shadow: 0 24px 50px -28px rgba(27, 27, 27, .4); }
+[data-project="rehab"] .cs-hero h1, [data-project="rehab"] .title { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; }
+[data-project="rehab"] .tagline { color: #5E8F12; }
+[data-project="rehab"] .cs-hero::before { background-image: radial-gradient(circle, #C8F57A 1.4px, transparent 1.8px); }
+[data-project="rehab"] .stat { border-top-color: var(--hl); }
+[data-project="rehab"] .btn { background: #1B1B1B; }
+[data-project="rehab"] .btn.ghost { background: #E9F8CF; color: #1B1B1B; }
+[data-project="rehab"] .stat b { font-family: "Inter", sans-serif; font-weight: 800; color: var(--text); }

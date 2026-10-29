@@ -9,7 +9,7 @@
     name: 'Tomas Alvarez',
     title: 'Game Designer',
     links: {
-      resume: 'https://canva.link/gnh4h8pgqpoa1g2',
+      resume: 'resume.html',
       linkedin: 'https://www.linkedin.com/in/gdtomasalvarez/',
       email: 'mailto:tomas1alvares@gmail.com',
       itch: 'https://literalvarez.itch.io'
@@ -26,7 +26,7 @@
         summary: 'Play as Jaime the frog and defeat the Yakuza Crane by dodging and attacking with your poisonous tongue. Built around aggressive play: stay close to the boss, stack poison and avoid its attacks.',
         highlights: ['Combat that rewards staying close, flipping the usual bullet hell strategy', 'Boomerang projectile that hits on the way out and back', 'Composed the menu and battle soundtrack and implemented audio'],
         tools: ['FMOD', 'Illustrator', 'Unity VFX & Shader Graph'] },
-      { title: 'The Last Beat', genre: '2D Top-Down Rhythm Survivor Shooter', role: 'Solo Developer & Composer', img: 'lastbeat.png', href: '#', contain: true,
+      { title: 'The Last Beat', genre: '2D Top-Down Rhythm Survivor Shooter', role: 'Solo Developer & Composer', img: 'lastbeat.png', href: '#', card: 'lastbeat',   // composed key-art card (see index.html media())
         team: 'Solo project', duration: '1 month',
         summary: 'A rhythm shooter where dashing, shooting and reloading only work on the beat. The music speeds up as you survive, new enemies arrive every minute, and upgrades help you keep up.',
         highlights: ['Rhythm-based combat system synced to the music', 'Progressive difficulty tuned through playtesting', 'Composed a 4-to-the-floor soundtrack that rises in BPM'],
@@ -84,7 +84,7 @@
       <a href="${home}#work" class="hide-sm">Work</a>
       <a href="${home}#about" class="hide-sm">About</a>
       ${root.dataset.playground ? `<a href="${root.dataset.playground}" class="hide-sm">Playground</a>` : ""}
-      <a href="${site.links.resume}" target="_blank" rel="noopener">Resume</a>
+      <a href="${site.links.resume}">Resume</a>
       ${dock ? "" : `<a href="${site.links.linkedin}" target="_blank" rel="noopener" class="hide-sm">LinkedIn</a>`}
       ${dock ? "" : `<a href="${site.links.email}">Email</a>`}
       <button class="theme-toggle" aria-label="Toggle light/dark mode">${icons.moon}${icons.sun}</button>
