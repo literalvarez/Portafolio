@@ -26,11 +26,11 @@
         summary: 'Play as Jaime the frog and defeat the Yakuza Crane by dodging and attacking with your poisonous tongue. Built around aggressive play: stay close to the boss, stack poison and avoid its attacks.',
         highlights: ['Combat that rewards staying close, flipping the usual bullet hell strategy', 'Boomerang projectile that hits on the way out and back', 'Composed the menu and battle soundtrack and implemented audio'],
         tools: ['FMOD', 'Illustrator', 'Unity VFX & Shader Graph'] },
-      { title: 'The Last Beat', genre: '2D Top-Down Rhythm Survivor Shooter', role: 'Solo Developer & Composer', img: 'lastbeat.png', href: '#', card: 'lastbeat',   // composed key-art card (see index.html media())
-        team: 'Solo project', duration: '1 month',
-        summary: 'A rhythm shooter where dashing, shooting and reloading only work on the beat. The music speeds up as you survive, new enemies arrive every minute, and upgrades help you keep up.',
-        highlights: ['Rhythm-based combat system synced to the music', 'Progressive difficulty tuned through playtesting', 'Composed a 4-to-the-floor soundtrack that rises in BPM'],
-        tools: ['Unity'] }
+      { title: 'The Last Beat', genre: '2D Top-Down Rhythm Survivor Shooter', role: 'Designer, Developer & Composer', img: 'lastbeat.png', href: '#', card: 'lastbeat',   // composed key-art card (see index.html media())
+        team: 'Solo project', duration: '2023 · updated 2026',
+        summary: 'A rhythm shooter where dashing, shooting and reloading only work on the beat. First made in 2023, then updated in 2026 with a new UI I designed, FMOD audio, polish and a rebalanced progression.',
+        highlights: ['Rhythm-based combat system synced to the music', 'Redesigned every screen in Figma and rebuilt the UI in Unity', 'Rebalanced progression and moved all audio to FMOD'],
+        tools: ['Unity', 'FMOD', 'Figma'] }
     ],
     // Playground / passion projects. Media, in order of preference: a YouTube id (`yt`), a SoundCloud track/playlist (`sc`), an itch.io `link`, or an MP3 (`audio`, in /assets).
     playground: [
