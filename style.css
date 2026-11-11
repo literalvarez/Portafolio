@@ -374,7 +374,7 @@
     content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background: radial-gradient(ellipse 46% 42% at 50% 36%, rgba(10, 2, 6, .55), transparent 75%);
   }
-  .card-lastbeat .lb-art { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: min(66%, 560px); }
+  .card-lastbeat .lb-art { position: absolute; left: 50%; top: 31%;   /* centred ~30% down, like the SAPO and Atomic Overdrive titles */ translate: -50% -50%; width: min(66%, 560px); }
   .card-lastbeat .lb-logo { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .7)); }   /* the in-game title logo */
   .project:hover .project-media.card-lastbeat .lb-logo { transform: none; }   /* the title stays still */
   .project:hover .project-media.card-lastbeat .lb-bg { transform: scale(1.045); }
