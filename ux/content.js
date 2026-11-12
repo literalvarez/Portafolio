@@ -18,7 +18,7 @@
     skills: [
       ['User research', 'Interviews, findings, personas'],
       ['Wireframing', 'Flows, structure, low-fi'],
-      ['UI design', 'Style guides, components'],
+      ['UI Design', 'Style guides, components'],
       ['Prototyping', 'Figma, interactive flows']
     ]
   };
@@ -185,6 +185,59 @@
     ]
   };
 
+  // ---------- The Last Beat case study (2026 UI/UX redesign of a 2023 game, from the game design site's page) ----------
+  const tlb = {
+    title: 'The Last Beat',
+    tagline: 'Every move on the beat.',
+    headline: 'Redesigning the interface of my rhythm shooter, from Figma to Unity.',
+    role: 'I made the game in 2023 with a UI designed by a classmate. In 2026 I went back and redesigned the whole interface myself, then built it in Unity.',
+    meta: [
+      ['Role', 'UI/UX Designer & Developer'],
+      ['Team', 'Solo project'],
+      ['Time frame', '2023 original, 2026 redesign'],
+      ['Methods', 'UI audit, Figma component library, playtesting'],
+      ['Discipline', 'Game UI/UX, visual design, motion'],
+      ['Tools', 'Figma, Unity 6, DOTween, FMOD']
+    ],
+    situation: 'The Last Beat is a 2D top-down rhythm shooter where dashing, shooting and reloading only work on the beat. Runs last five minutes and get faster as the music speeds up, so players have only a split second to read the screen.',
+    problems: [
+      ['A HUD that was hard to read', 'Time, the beat and the score were spread around the screen, far from where the action happens.'],
+      ['An inconsistent look', 'Screens used different fonts, buttons and panels, so the game didn\'t feel like one product.'],
+      ['A confusing flow', 'How to play, the death screen and the win screen were scattered across separate places.']
+    ],
+    stats: [['10', 'screens redesigned'], ['5 min', 'per run'], ['2023 → 2026', 'original to redesign']],
+    process: [
+      ['Design in Figma', 'Every screen was designed first, on top of a component library with one button style and shared panel outlines.'],
+      ['Build in Unity', 'The library was rebuilt as a reusable UI kit, and every screen was assembled from it, with layouts that adapt to any screen shape.'],
+      ['Tune through playtests', 'Motion, timing and balance were tuned in-game through rounds of playtesting, with an in-game UI Lab to adjust motion and colours live.']
+    ],
+    decisions: [
+      ['A HUD read at a glance', 'hud', 'Players had to look away from the action to check the time, the beat and their score.',
+        'Time, the beat bar and the score sit together at the top centre, with the XP bar along the top edge.',
+        'Everything the player needs is in one line of sight, even when the music speeds up.'],
+      ['Level-up choices you can compare', 'levelup', 'Players pick an upgrade mid-run, with only seconds before the action starts again.',
+        'Each card shows the stat\'s current and new value, with the player\'s stats underneath.',
+        'Players can make a quick, informed choice mid-run and get back to the beat.'],
+      ['One results screen', 'results', 'Wins and deaths ended on different screens.',
+        'One results screen for both, with run stats, name entry, the online leaderboard and clear states while a score is submitted.',
+        'Every run ends the same way, so players always know what happened and what to do next.']
+    ],
+    flow: 'The main menu got simpler too: How to play moved into the pause menu as Controls, so the menu is just Play, Settings, Credits and Quit.',
+    feel: [
+      ['Motion on the beat', 'Buttons react to hover, press and click, screens animate in and out, and elements pulse with the music.'],
+      ['Audio-driven UI', 'Moving the audio to FMOD let the beat clock, the countdown and the UI\'s pulse follow the music exactly.'],
+      ['Screen effects', 'A subtle CRT effect and shaders that pulse on the beat tie the interface to the game world.']
+    ],
+    screens: [['menu', 'Main menu'], ['settings', 'Settings'], ['controls', 'Controls'], ['countdown', 'Countdown'], ['hud', 'HUD'],
+      ['nextsong', 'Next song'], ['levelup', 'Level up'], ['pause', 'Pause'], ['credits', 'Credits'], ['results', 'Results']],
+    takeaways: [
+      ['Small details, big polish', 'Transitions and screen effects make a game feel much more finished.'],
+      ['Design the system first', 'A shared component library made ten screens feel like one game.'],
+      ['Test it in motion', 'A HUD that works in a mockup still has to work at full speed, on the beat.']
+    ],
+    play: 'https://literalvarez.itch.io/the-last-beat?secret=Md1Lwz51F91PobHEQXHW7sTA2Y'
+  };
+
   // ---------- Shared pieces ----------
   function nav(here) {
     const home = here === 'home' ? '' : 'index.html';
@@ -268,20 +321,24 @@
   const label = (n, t) => `<span class="label reveal">${n ? `<b>${n}</b>` : ''}${t}</span>`;
 
   // ---------- Home ----------
-  // home cards: what Tomas did on each project, with numbers from the case studies
+  // home cards: what Tomas did on each project
   const cards = [
-    { id: 'lc', href: 'last-cow.html', title: lc.title, tags: ['Mobile app', 'UX research', 'UI design'],
+    { id: 'tlb', href: 'the-last-beat.html', title: tlb.title, tags: ['Game UI', 'UI/UX Redesign', 'Figma to Unity'],
+      shots: ['lastbeat/2026/menu-full.jpg', 'lastbeat/2026/hud-full.jpg', 'lastbeat/2026/levelup-full.jpg'],
+      did: 'I redesigned the whole interface of my rhythm shooter, from a Figma component library to a Unity UI kit, and tuned it through playtesting.'
+    },
+    { id: 'lc', href: 'last-cow.html', title: lc.title, tags: ['Mobile app', 'UX research', 'UI Design'],
       shots: ['lastcow/login.jpg', 'lastcow/home.jpg', 'lastcow/event.jpg'],
-      did: 'I led research and design for a last-minute ticket app, from surveys and a tree test to an Atomic Design UI kit and a tested prototype.',
-      nums: [['25', 'surveys'], ['5', 'interviews'], ['5', 'usability tests']] },
-    { id: 'pc', href: 'perfecto-cafe.html', title: pc.title, tags: ['Website', 'Heuristic evaluation', 'UI design'],
+      did: 'I led research and design for a last-minute ticket app, from surveys and a tree test to an Atomic Design UI kit and a tested prototype.'
+    },
+    { id: 'pc', href: 'perfecto-cafe.html', title: pc.title, tags: ['Website', 'Heuristic evaluation', 'UI Design'],
       shots: ['perfecto/home.jpg', 'perfecto/menu.jpg', 'perfecto/contact.jpg'],
-      did: 'I audited a bakery café\'s website against usability heuristics and redesigned its menu into a grid that\'s quick to scan.',
-      nums: [['10', 'heuristics'], ['4', 'pages redesigned'], ['2', 'weeks']] },
+      did: 'I audited a bakery café\'s website against usability heuristics and redesigned its menu into a grid that\'s quick to scan.'
+    },
     { id: 'rh', href: 'rehab.html', title: rh.title, tags: ['Mobile app', 'UX research', 'Usability testing'],
       shots: ['rehab/home.jpg', 'rehab/progress.jpg', 'rehab/congrats.jpg'],
-      did: 'I framed the problem through research and ran usability testing for an app that helps patients stick with home rehab.',
-      nums: [['8', 'test participants'], ['100%', 'found the doctor\'s advice'], ['14 s', 'median time']] }
+      did: 'I framed the problem through research and ran usability testing for an app that helps patients stick with home rehab.'
+    }
   ];
 
   function home(el) {
@@ -304,13 +361,11 @@
           <h2 class="title reveal">Case studies</h2>
           ${cards.map(c => `
           <a class="case-card reveal" href="${c.href}">
-            <div class="case-media scene scene-${c.id}"><div class="tilt">${c.shots.map(s => `<img src="${R}assets/${s}" alt="" loading="lazy">`).join('')}</div></div>
+            <div class="case-media scene scene-${c.id}"><div class="shots">${c.shots.map(s => `<img src="${R}assets/${s}" alt="" loading="lazy">`).join('')}</div></div>
             <div class="case-info">
               <span class="tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</span>
               <h3>${c.title}</h3>
-              <p>${c.did}</p>
-              <ul class="case-nums">${c.nums.map(([n, t]) => `<li><b>${n}</b>${t}</li>`).join('')}</ul>
-              <span class="more">Read case study ${arrow}</span>
+              <p>${c.did}</p>              <span class="more">Read case study ${arrow}</span>
             </div>
           </a>`).join('')}
         </div>
@@ -659,6 +714,111 @@
     footer(); reveal(); lightbox();
   }
 
+  // ---------- The Last Beat page: then & now first, then the process, decisions, kit and feel ----------
+  const gimg = f => `${R}assets/lastbeat/${f}`;
+  const gshot = (f, alt) => `<figure class="game-shot"><img src="${gimg(f)}" alt="${alt}" loading="lazy" data-zoom="${gimg(f)}"></figure>`;
+
+  function lastBeat(el) {
+    nav('case');
+    const points = list => `<div class="findings">${list.map(([h, p], i) => `<div class="finding reveal" style="--d:${i}"><h3>${h}</h3><p>${p}</p></div>`).join('')}</div>`;
+    const stats = list => `<div class="stats">${list.map(([n, t], i) => `<div class="stat reveal" style="--d:${i}"><b>${n}</b><span>${t}</span></div>`).join('')}</div>`;
+    el.innerHTML = `
+      <section class="cs-hero" id="top">
+        <div class="wrap">
+          <a class="back" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All work</a>
+          <span class="eyebrow reveal">Case study · Game UI/UX</span>
+          <h1 class="reveal">${tlb.title}</h1>
+          <p class="tagline reveal">${tlb.tagline}</p>
+          <p class="lede reveal">${tlb.headline}</p>
+          <div class="reveal">${gshot('2026/menu-full.jpg', 'The Last Beat redesigned main menu')}</div>
+          <div class="my-role reveal"><h2>My role</h2><p>${tlb.role}</p></div>
+          <dl class="meta reveal">${tlb.meta.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+        </div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Overview')}
+          <h2 class="title reveal">A screen that moves to the music</h2>
+          <p class="big reveal narrow-text">${tlb.situation}</p>
+          ${stats(tlb.stats)}
+        </div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Then & now')}
+          <h2 class="title reveal">What the 2023 interface got wrong</h2>
+          <div class="then-now">
+            <figure class="reveal">${gshot('2023/hud.webp', 'The Last Beat 2023 HUD')}<figcaption>2023</figcaption></figure>
+            <figure class="reveal now">${gshot('2026/hud-full.jpg', 'The Last Beat 2026 HUD')}<figcaption>2026</figcaption></figure>
+          </div>
+          ${points(tlb.problems)}
+        </div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Process')}
+          <h2 class="title reveal">Design first, then build and tune</h2>
+          ${points(tlb.process)}
+        </div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Design decisions')}
+          <h2 class="title reveal">Built for split-second reading</h2>
+          <div class="decisions">${tlb.decisions.map(([h, f, prob, how, why]) => `
+            <article class="decision web-decision reveal">
+              ${gshot(`2026/${f}-full.jpg`, h)}
+              <div>
+                <h3>${h}</h3>
+                <div class="why"><b>The problem</b><p>${prob}</p></div>
+                <div class="why"><b>The rationale</b><p>${how}</p></div>
+                <div class="why"><b>Why it works</b><p>${why}</p></div>
+              </div>
+            </article>`).join('')}</div>
+          <p class="big reveal narrow-text flow-note">${tlb.flow}</p>
+        </div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Component library')}
+          <h2 class="title reveal">One kit for every screen</h2>
+          <p class="reveal intro">Built in Figma first, then rebuilt in Unity and used for all ten screens: icons, sliders, buttons, cards, the XP bar and leaderboard rows.</p>
+          <img class="wide reveal" src="${gimg('2026/figma-components.jpg')}" alt="The Last Beat Figma component library" loading="lazy" data-zoom="${gimg('2026/figma-components.jpg')}">
+        </div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Motion & feel')}
+          <h2 class="title reveal">An interface that moves with the music</h2>
+          ${points(tlb.feel)}
+        </div>
+      </section>
+
+      <section class="cs-sec screens-sec">
+        <div class="wrap">
+          ${label('', 'Final screens')}
+          <h2 class="title reveal">The new interface</h2>
+        </div>
+        <div class="screens game-screens">${tlb.screens.map(([f, n]) => `<figure><img src="${gimg(`2026/${f}-full.jpg`)}" alt="${n}" loading="lazy" data-zoom="${gimg(`2026/${f}-full.jpg`)}"><figcaption>${n}</figcaption></figure>`).join('')}</div>
+      </section>
+
+      <section class="cs-sec">
+        <div class="wrap">
+          ${label('', 'Result')}
+          <h2 class="title reveal">What going back taught me</h2>
+          ${points(tlb.takeaways)}
+          <div class="hero-cta reveal"><a class="btn" href="${tlb.play}" target="_blank" rel="noopener">Play the 2026 version ${arrow}</a></div>
+        </div>
+      </section>`;
+    footer(); reveal(); lightbox();
+  }
+
   // ---------- Resume page: the PDF drawn page by page (pdf.js), with its links laid on top ----------
   function resume(el) {
     nav('resume');
@@ -724,5 +884,5 @@
     })();
   }
 
-  window.UX = { site, lastcow: lc, perfecto: pc, rehab: rh, home, caseStudy, perfectoStudy: perfecto, rehabStudy: rehab, resume };
+  window.UX = { site, lastcow: lc, perfecto: pc, rehab: rh, home, caseStudy, perfectoStudy: perfecto, rehabStudy: rehab, lastBeatStudy: lastBeat, resume };
 })();

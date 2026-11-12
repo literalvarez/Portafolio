@@ -62,19 +62,32 @@ p { margin: 0 0 1em; }
 .case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .case-media { position: relative; background: #C7B1EC; padding: 44px 28px 0; display: flex; flex-direction: column; align-items: center; overflow: hidden; min-height: 380px; }
 .case-card + .case-card { margin-top: 26px; }
-/* angled 3D scenes: three screens laid on a tilted plane, stepping up toward the viewer, lifting further on hover */
-.case-media.scene { padding: 0; perspective: 1600px; }
-.scene .tilt { position: absolute; left: 50%; top: 50%; width: min(112%, 720px); display: flex; gap: 6%; align-items: flex-start;
-  transform: translate(-50%, -46%) rotateX(50deg) rotateZ(-30deg); transform-style: preserve-3d; }
-.scene img { flex: 1; min-width: 0; border-radius: 16px; box-shadow: 18px 28px 40px -14px var(--scene-shadow, rgba(40, 10, 120, .45)); transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
-.scene img:nth-child(2) { transform: translateZ(36px); }
-.scene img:nth-child(3) { transform: translateZ(72px); }
-.case-card:hover .scene img:nth-child(1) { transform: translateZ(18px); }
-.case-card:hover .scene img:nth-child(2) { transform: translateZ(64px); }
-.case-card:hover .scene img:nth-child(3) { transform: translateZ(110px); }
+/* card images: screens laid flat in a centred row, the middle one slightly larger; they lift a little on hover */
+.case-media.scene { padding: 0; }
+.scene .shots { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 4%; padding: 0 6%; }
+.scene img { width: 27%; min-width: 0; border-radius: 14px; box-shadow: 0 18px 34px -16px var(--scene-shadow, rgba(40, 10, 120, .45)); transition: transform .4s; }
+.scene img:nth-child(2) { width: 31%; }
+.case-card:hover .scene img { transform: translateY(-6px); }
 .scene-pc { background: linear-gradient(160deg, #EEEFE8, #B9BFAA) !important; --scene-shadow: rgba(37, 40, 33, .45); }
 .scene-pc img { aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 8px; }
+/* the game is 16:9, so its card shows one large screen */
+.scene-tlb { background: radial-gradient(70% 70% at 50% 45%, #1E3FE0, #0B0E24 75%) !important; --scene-shadow: rgba(0, 0, 0, .65); }
+.scene-tlb img { width: 84% !important; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; }
+.scene-tlb img:not(:first-child) { display: none; }
 .scene-rh { background: radial-gradient(70% 70% at 60% 40%, #3A4A1C, #151515 75%) !important; --scene-shadow: rgba(0, 0, 0, .6); }
+/* The Last Beat: 16:9 game screenshots in a dark frame */
+.game-shot { margin: 0; border-radius: 14px; overflow: hidden; background: #0B0E24; border: 1.5px solid #1B2257; box-shadow: var(--shadow); }
+.game-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; cursor: zoom-in; }
+.cs-hero .game-shot { margin-top: 34px; }
+.then-now { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 26px 0 34px; }
+.then-now figure { margin: 0; }
+.then-now figcaption { margin-top: 10px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 18px; color: var(--muted); }
+.then-now .now figcaption { color: var(--accent); }
+.then-now .now .game-shot { border-color: var(--accent); }
+.flow-note { margin-top: clamp(40px, 5vw, 64px); }
+.game-screens figure { flex-basis: clamp(280px, 38vw, 520px); }
+.game-screens img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; border: 1.5px solid #1B2257; box-shadow: var(--shadow); cursor: zoom-in; }
+@media (max-width: 720px) { .then-now { grid-template-columns: 1fr; } }
 /* resume page: the PDF pages on white paper cards */
 .r-hero { padding-bottom: 24px; }
 .r-bar { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
@@ -87,12 +100,9 @@ p { margin: 0 0 1em; }
 .r-page a:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); outline: 1.5px solid color-mix(in srgb, var(--accent) 50%, transparent); }
 .r-loading { padding: 60px 0; text-align: center; color: var(--muted); }
 .r-fallback { width: 100%; max-width: 860px; height: 80vh; border: 0; border-radius: 8px; background: #fff; }
-/* hero statement; case cards end with a short line of numbers */
+/* hero statement */
 .statement { font-size: clamp(22px, 2.6vw, 34px); font-weight: 600; line-height: 1.25; color: var(--text); margin: 0 0 16px; max-width: 22em; }
 .statement b { color: var(--accent); font-weight: 700; }
-.case-nums { list-style: none; padding: 0; margin: 2px 0 4px; display: flex; flex-wrap: wrap; gap: 10px 26px; }
-.case-nums li { display: flex; flex-direction: column; font-size: 14px; color: var(--muted); }
-.case-nums b { font-size: 22px; font-weight: 800; color: var(--text); line-height: 1.1; }
 .case-info { padding: clamp(24px, 4vw, 44px); display: flex; flex-direction: column; gap: 14px; align-self: center; }
 .case-info h3 { font-size: clamp(28px, 3.4vw, 40px); }
 .case-info p { color: var(--muted); margin: 0; }

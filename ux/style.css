@@ -36,4 +36,8 @@ h3 { font-family: var(--font); font-weight: 700; }
 [data-project="rehab"] .stat { border-top-color: var(--hl); }
 [data-project="rehab"] .btn { background: #1B1B1B; }
 [data-project="rehab"] .btn.ghost { background: #E9F8CF; color: #1B1B1B; }
+[data-project="lastbeat"] { --accent: #1E3FE0; --shadow: 0 24px 50px -28px rgba(10, 18, 90, .55); }
+[data-project="lastbeat"] .cs-hero h1, [data-project="lastbeat"] .title { font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; }
+[data-project="lastbeat"] .cs-hero::before { background-image: radial-gradient(circle, #8EA2FF 1.2px, transparent 1.6px); }
+[data-project="lastbeat"] .stat b { font-family: 'Orbitron', sans-serif; font-weight: 700; }
 [data-project="rehab"] .stat b { font-family: "Inter", sans-serif; font-weight: 800; color: var(--text); }
