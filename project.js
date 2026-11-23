@@ -6,11 +6,24 @@ window.initProjectPage = function ({ gallery = [] } = {}) {
   initReveal();
 
   // ---------- Lazy YouTube embeds: a thumbnail until clicked ----------
+  // data-loop="assets/video/<name>/" swaps the still for a silent looping clip (loop.webm / loop.mp4 / poster.jpg)
+  // that plays only while on screen; a click still loads the YouTube player.
+  const loopIO = new IntersectionObserver(entries => entries.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+  }), { rootMargin: '100px 0px' });
   document.querySelectorAll('.yt').forEach(b => {
-    b.insertAdjacentHTML('afterbegin', `<img src="https://i.ytimg.com/vi/${b.dataset.id}/hqdefault.jpg" alt="" loading="lazy"><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>`);
+    const d = b.dataset.loop;
+    const media = d
+      ? `<video muted loop playsinline preload="${reducedMotion ? 'none' : 'metadata'}" poster="${d}poster.jpg" aria-hidden="true"><source src="${d}loop.mp4" type="video/mp4"><source src="${d}loop.webm" type="video/webm"></video>`
+      : `<img src="https://i.ytimg.com/vi/${b.dataset.id}/hqdefault.jpg" alt="" loading="lazy">`;
+    b.insertAdjacentHTML('afterbegin', `${media}<span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>`);
+    const v = b.querySelector('video');
+    if (v && !reducedMotion) loopIO.observe(v);
     b.addEventListener('click', () => {
       if (b.classList.contains('on')) return;
       b.classList.add('on');
+      if (v) loopIO.unobserve(v);
       b.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0" title="${b.getAttribute('aria-label')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     });
   });
