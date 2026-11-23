@@ -741,6 +741,7 @@
           ${label('', 'Overview')}
           <h2 class="title reveal">A screen that moves to the music</h2>
           <p class="big reveal narrow-text">${tlb.situation}</p>
+          <div class="reveal">${trailer('zhtIxyh8Syw', `${R}assets/video/lastbeat-trailer/`, 'Play The Last Beat trailer')}</div>
           ${stats(tlb.stats)}
         </div>
       </section>
@@ -816,7 +817,29 @@
           <div class="hero-cta reveal"><a class="btn" href="${tlb.play}" target="_blank" rel="noopener">Play the 2026 version ${arrow}</a></div>
         </div>
       </section>`;
-    footer(); reveal(); lightbox();
+    footer(); reveal(); lightbox(); trailers();
+  }
+
+  // ---------- Trailer: a silent looping preview (plays only while on screen) until clicked, then YouTube ----------
+  // Same clips as the game design site (assets/video/<name>/loop.mp4, loop.webm, poster.jpg).
+  const playIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  function trailer(id, dir, label) {
+    return `<button class="trailer" data-id="${id}" aria-label="${label}">
+      <video muted loop playsinline preload="metadata" poster="${dir}poster.jpg" aria-hidden="true"><source src="${dir}loop.mp4" type="video/mp4"><source src="${dir}loop.webm" type="video/webm"></video>
+      <span class="pl">${playIcon}</span><span class="cap">Trailer</span></button>`;
+  }
+  function trailers() {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause(); }), { rootMargin: '100px 0px' });
+    document.querySelectorAll('.trailer').forEach(b => {
+      const v = b.querySelector('video');
+      if (!still) io.observe(v);
+      b.addEventListener('click', () => {
+        if (b.classList.contains('on')) return;
+        io.unobserve(v); b.classList.add('on');
+        b.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0" title="${b.getAttribute('aria-label')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      });
+    });
   }
 
   // ---------- Resume page: the PDF drawn page by page (pdf.js), with its links laid on top ----------
